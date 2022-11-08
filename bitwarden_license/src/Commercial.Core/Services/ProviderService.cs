@@ -436,7 +436,7 @@ public class ProviderService : IProviderService
             throw new BadRequestException("Invalid organization.");
         }
 
-        if (!await _organizationService.HasConfirmedOwnersExceptAsync(providerOrganization.OrganizationId, new Guid[] { }, includeProvider: false))
+        if (!await _organizationService.HasConfirmedOwnersExceptAsync(providerOrganization.OrganizationId, Array.Empty<Guid>(), includeProvider: false))
         {
             throw new BadRequestException("Organization needs to have at least one confirmed owner.");
         }
