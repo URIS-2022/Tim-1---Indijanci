@@ -87,13 +87,13 @@ public class HomeController : Controller
         return new JsonResult("-");
     }
 
-    private class LatestVersions
+    private sealed class LatestVersions
     {
         [JsonProperty("versions")]
         public Versions Versions { get; set; }
     }
 
-    private class Versions
+    private sealed class Versions
     {
         [JsonProperty("coreVersion")]
         public string CoreVersion { get; set; }
