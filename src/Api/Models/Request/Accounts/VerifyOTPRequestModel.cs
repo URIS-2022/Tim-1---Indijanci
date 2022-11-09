@@ -2,7 +2,7 @@
 
 namespace Bit.Api.Models.Request.Accounts;
 
-public class VerifyOTPRequestModel
+public class VerifyOtpRequestModel
 {
     [Required]
     public string OTP { get; set; }

@@ -33,7 +33,7 @@ public class EmailTokenProvider : IUserTwoFactorTokenProvider<User>
         var provider = user.GetTwoFactorProvider(TwoFactorProviderType.Email);
         if (!HasProperMetaData(provider))
         {
-            return null;
+            return Task.FromResult<string>(null);
         }
 
         return Task.FromResult(RedactEmail((string)provider.MetaData["Email"]));

@@ -119,7 +119,7 @@ public class PatchGroupCommand : IPatchGroupCommand
         }
     }
 
-    private List<Guid> GetOperationValueIds(JsonElement objArray)
+    private static List<Guid> GetOperationValueIds(JsonElement objArray)
     {
         var ids = new List<Guid>();
         foreach (var obj in objArray.EnumerateArray())

@@ -6,7 +6,7 @@ using Bit.Core.Utilities;
 
 namespace Bit.Core.Entities;
 
-public class Organization : ITableObject<Guid>, ISubscriber, IStorable, IStorableSubscriber, IRevisable, IReferenceable
+public class Organization : ITableObject<Guid>, IStorableSubscriber, IRevisable, IReferenceable
 {
     private Dictionary<TwoFactorProviderType, TwoFactorProvider> _twoFactorProviders;
 

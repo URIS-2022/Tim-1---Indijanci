@@ -19,7 +19,10 @@ public static class ApiHelpers
                 using var stream = file.OpenReadStream();
                 obj = await JsonSerializer.DeserializeAsync<T>(stream, JsonHelpers.IgnoreCase);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         return obj;

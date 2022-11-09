@@ -47,7 +47,7 @@ public class HomeController : Controller
             var response = await _httpClient.GetAsync(requestUri, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
-                var latestVersions = JsonConvert.DeserializeObject<LatestVersions>(await response.Content.ReadAsStringAsync());
+                var latestVersions = JsonConvert.DeserializeObject<LatestVersions>(await response.Content.ReadAsStringAsync(cancellationToken));
                 return project switch
                 {
                     ProjectType.Core => new JsonResult(latestVersions.Versions.CoreVersion),
@@ -87,13 +87,13 @@ public class HomeController : Controller
         return new JsonResult("-");
     }
 
-    private class LatestVersions
+    private sealed class LatestVersions
     {
         [JsonProperty("versions")]
         public Versions Versions { get; set; }
     }
 
-    private class Versions
+    private sealed class Versions
     {
         [JsonProperty("coreVersion")]
         public string CoreVersion { get; set; }

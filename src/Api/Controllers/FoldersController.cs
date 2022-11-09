@@ -51,7 +51,6 @@ public class FoldersController : Controller
     [HttpPost("")]
     public async Task<FolderResponseModel> Post([FromBody] FolderRequestModel model)
     {
-        var userId = _userService.GetProperUserId(User).Value;
         var folder = model.ToFolder(_userService.GetProperUserId(User).Value);
         await _cipherService.SaveFolderAsync(folder);
         return new FolderResponseModel(folder);

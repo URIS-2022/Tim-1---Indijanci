@@ -243,7 +243,7 @@ public class AccountController : Controller
             // This might be where you might initiate a custom workflow for user registration
             // in this sample we don't show how that would be done, as our sample implementation
             // simply auto-provisions new external user
-            var userIdentifier = result.Properties.Items.Keys.Contains("user_identifier") ?
+            var userIdentifier = result.Properties.Items.ContainsKey("user_identifier") ?
                 result.Properties.Items["user_identifier"] : null;
             user = await AutoProvisionUserAsync(provider, providerUserId, claims, userIdentifier, ssoConfigData);
         }
