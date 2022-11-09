@@ -47,7 +47,7 @@ public class HomeController : Controller
             var response = await _httpClient.GetAsync(requestUri, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
-                var latestVersions = JsonConvert.DeserializeObject<LatestVersions>(await response.Content.ReadAsStringAsync());
+                var latestVersions = JsonConvert.DeserializeObject<LatestVersions>(await response.Content.ReadAsStringAsync(cancellationToken));
                 return project switch
                 {
                     ProjectType.Core => new JsonResult(latestVersions.Versions.CoreVersion),

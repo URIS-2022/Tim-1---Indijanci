@@ -393,7 +393,7 @@ public class ProviderServiceTests
         sutProvider.GetDependency<IProviderRepository>().GetByIdAsync(provider.Id).Returns(provider);
         var providerUserRepository = sutProvider.GetDependency<IProviderUserRepository>();
         providerUserRepository.GetManyAsync(default).ReturnsForAnyArgs(providerUsers);
-        providerUserRepository.GetManyByProviderAsync(default, default).ReturnsForAnyArgs(new ProviderUser[] { });
+        providerUserRepository.GetManyByProviderAsync(default, default).ReturnsForAnyArgs(Array.Empty<ProviderUser>());
 
         var exception = await Assert.ThrowsAsync<BadRequestException>(
             () => sutProvider.Sut.DeleteUsersAsync(provider.Id, userIds, deletingUser.Id));
