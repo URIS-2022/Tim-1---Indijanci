@@ -103,9 +103,9 @@ public class CiphersController : Controller
     {
         var userId = _userService.GetProperUserId(User).Value;
         var hasOrgs = _currentContext.Organizations?.Any() ?? false;
-        var withOrg = true || hasOrgs;
+    
         // TODO: Use hasOrgs proper for cipher listing here?
-        var ciphers = await _cipherRepository.GetManyByUserIdAsync(userId, withOrg);
+        var ciphers = await _cipherRepository.GetManyByUserIdAsync(userId, hasOrgs = true);
         Dictionary<Guid, IGrouping<Guid, CollectionCipher>> collectionCiphersGroupDict = null;
         if (hasOrgs)
         {
