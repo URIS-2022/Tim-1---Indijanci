@@ -40,7 +40,6 @@ public class SsoAuthenticationMiddleware
             {
                 switch (dynamicScheme.SsoType)
                 {
-                    case SsoType.OpenIdConnect:
                     default:
                         if (dynamicScheme.Options is OpenIdConnectOptions oidcOptions &&
                             !await oidcOptions.CouldHandleAsync(scheme.Name, context))
