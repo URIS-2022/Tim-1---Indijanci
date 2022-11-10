@@ -475,7 +475,6 @@ public class AccountController : Controller
                 throw new Exception(_i18nService.T("UserAlreadyInvited", email, organization.Name));
             }
 
-            // Accepted or Confirmed - create SSO link and return;
             await CreateSsoUserRecord(providerUserId, existingUser.Id, orgId, orgUser);
             return existingUser;
         }
