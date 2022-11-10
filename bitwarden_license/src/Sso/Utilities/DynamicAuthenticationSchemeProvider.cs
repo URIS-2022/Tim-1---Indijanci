@@ -66,7 +66,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
             IExtendedOptionsMonitorCache<Saml2Options>;
         if (_extendedSaml2OptionsMonitorCache == null)
         {
-            throw new ArgumentNullException("_extendedSaml2OptionsMonitorCache could not be resolved.");
+            throw new ArgumentNullException("_extendedSaml2OptionsMonitorCache could not be resolved.", "_extendedSaml2OptionsMonitorCache");
         }
 
         _ssoConfigRepository = ssoConfigRepository;

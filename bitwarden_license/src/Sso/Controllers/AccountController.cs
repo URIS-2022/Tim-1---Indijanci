@@ -660,18 +660,6 @@ public class AccountController : Controller
         }
     }
 
-    private async Task<string> GetProviderAsync(string returnUrl)
-    {
-        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-        if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
-        {
-            return context.IdP;
-        }
-        var schemes = await _schemeProvider.GetAllSchemesAsync();
-        var providers = schemes.Select(x => x.Name).ToList();
-        return providers.FirstOrDefault();
-    }
-
     private async Task<(string, string, string)> GetLoggedOutDataAsync(string logoutId)
     {
         // Get context information (client name, post logout redirect URI and iframe for federated signout)

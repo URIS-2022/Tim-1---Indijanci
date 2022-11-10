@@ -1,7 +1,7 @@
 ﻿@model RedirectViewModel
 @section Head
 {
-    <meta http-equiv="refresh" content="0;url=@Model.RedirectUrl" data-url="@Model.RedirectUrl">
+    <meta name="description" content="0;url=@Model.RedirectUrl" data-url="@Model.RedirectUrl">
     <script>
         window.onload = function () {
             window.location.href = document.querySelector("meta[http-equiv=refresh]").getAttribute("data-url");
