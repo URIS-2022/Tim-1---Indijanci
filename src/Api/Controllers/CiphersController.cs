@@ -102,12 +102,12 @@ public class CiphersController : Controller
     public async Task<ListResponseModel<CipherDetailsResponseModel>> Get()
     {
         var userId = _userService.GetProperUserId(User).Value;
-        var hasOrgs = _currentContext.Organizations?.Any() ?? false;
+        var hasOrgs = _currentContext.Organizations?.Any();
     
         // TODO: Use hasOrgs proper for cipher listing here?
-        var ciphers = await _cipherRepository.GetManyByUserIdAsync(userId, hasOrgs = true);
+        var ciphers = await _cipherRepository.GetManyByUserIdAsync(userId, (bool)hasOrgs);
         Dictionary<Guid, IGrouping<Guid, CollectionCipher>> collectionCiphersGroupDict = null;
-        if (hasOrgs)
+        if ((bool)hasOrgs)
         {
             var collectionCiphers = await _collectionCipherRepository.GetManyByUserIdAsync(userId);
             collectionCiphersGroupDict = collectionCiphers.GroupBy(c => c.CipherId).ToDictionary(s => s.Key);

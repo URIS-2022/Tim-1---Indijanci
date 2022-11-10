@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Security.Authentication;
+using System.Security.Claims;
 using Bit.Core;
 using Bit.Core.Entities;
 using Bit.Core.Enums;
@@ -158,7 +159,7 @@ public class AccountController : Controller
         if (!context.Parameters.AllKeys.Contains("domain_hint") ||
             string.IsNullOrWhiteSpace(context.Parameters["domain_hint"]))
         {
-            throw new Exception(_i18nService.T("NoDomainHintProvided"));
+            throw new ArgumentNullException(_i18nService.T("NoDomainHintProvided"));
         }
 
         var ssoToken = context.Parameters[SsoTokenable.TokenIdentifier];
@@ -229,7 +230,7 @@ public class AccountController : Controller
             AuthenticationSchemes.BitwardenExternalCookieAuthenticationScheme);
         if (result?.Succeeded != true)
         {
-            throw new Exception(_i18nService.T("ExternalAuthenticationError"));
+            throw new AuthenticationException(_i18nService.T("ExternalAuthenticationError"));
         }
 
         // Debugging
@@ -475,7 +476,6 @@ public class AccountController : Controller
                 throw new Exception(_i18nService.T("UserAlreadyInvited", email, organization.Name));
             }
 
-            // Accepted or Confirmed - create SSO link and return;
             await CreateSsoUserRecord(providerUserId, existingUser.Id, orgId, orgUser);
             return existingUser;
         }
@@ -658,18 +658,6 @@ public class AccountController : Controller
             localSignInProps.StoreTokens(
                 new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
         }
-    }
-
-    private async Task<string> GetProviderAsync(string returnUrl)
-    {
-        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-        if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
-        {
-            return context.IdP;
-        }
-        var schemes = await _schemeProvider.GetAllSchemesAsync();
-        var providers = schemes.Select(x => x.Name).ToList();
-        return providers.FirstOrDefault();
     }
 
     private async Task<(string, string, string)> GetLoggedOutDataAsync(string logoutId)
