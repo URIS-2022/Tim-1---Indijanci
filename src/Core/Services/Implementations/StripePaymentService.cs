@@ -1514,7 +1514,7 @@ public class StripePaymentService : IPaymentService
                 subscriptionInfo.Subscription = new SubscriptionInfo.BillingSubscription(sub);
             }
 
-            if (!sub.CanceledAt.HasValue && !string.IsNullOrWhiteSpace(subscriber.GatewayCustomerId))
+            if (!sub.CanceledAt.HasValue && !string.IsNullOrWhiteSpace(subscriber.GatewayCustomerId) && sub != null)
             {
                 try
                 {
