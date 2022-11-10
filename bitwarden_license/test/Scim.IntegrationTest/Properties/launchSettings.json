@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Scim.IntegrationTest": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:65485;http://localhost:65486"
+    }
+  }
+}
