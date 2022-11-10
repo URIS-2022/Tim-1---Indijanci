@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Security.Authentication;
+using System.Security.Claims;
 using Bit.Core;
 using Bit.Core.Entities;
 using Bit.Core.Enums;
@@ -158,7 +159,7 @@ public class AccountController : Controller
         if (!context.Parameters.AllKeys.Contains("domain_hint") ||
             string.IsNullOrWhiteSpace(context.Parameters["domain_hint"]))
         {
-            throw new Exception(_i18nService.T("NoDomainHintProvided"));
+            throw new ArgumentNullException(_i18nService.T("NoDomainHintProvided"));
         }
 
         var ssoToken = context.Parameters[SsoTokenable.TokenIdentifier];
@@ -229,7 +230,7 @@ public class AccountController : Controller
             AuthenticationSchemes.BitwardenExternalCookieAuthenticationScheme);
         if (result?.Succeeded != true)
         {
-            throw new Exception(_i18nService.T("ExternalAuthenticationError"));
+            throw new AuthenticationException(_i18nService.T("ExternalAuthenticationError"));
         }
 
         // Debugging
