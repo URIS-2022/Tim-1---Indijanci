@@ -1,6 +1,7 @@
 ﻿@model Bit.Identity.Models.RedirectViewModel
 <html>
 <head>
+	<title>Redirection Page</title>
     <meta http-equiv="refresh" content="0;url=@Model.RedirectUrl" data-url="@Model.RedirectUrl">
     <script>
         window.location.href = document.querySelector("meta[http-equiv=refresh]").getAttribute("data-url");

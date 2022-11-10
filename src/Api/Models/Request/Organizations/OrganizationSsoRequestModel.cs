@@ -136,7 +136,7 @@ public class SsoConfigurationDataRequest : IValidatableObject
                 try
                 {
                     var certData = CoreHelpers.Base64UrlDecode(StripPemCertificateElements(IdpX509PublicCert));
-                    new X509Certificate2(certData);
+                    _ = new X509Certificate2(certData);
                 }
                 catch (FormatException)
                 {
