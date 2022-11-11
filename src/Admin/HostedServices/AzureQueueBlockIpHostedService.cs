@@ -6,7 +6,6 @@ namespace Bit.Admin.HostedServices;
 
 public class AzureQueueBlockIpHostedService : BlockIpHostedService
 {
-    private QueueClient _blockIpQueueClient;
     private QueueClient _unblockIpQueueClient;
 
     public AzureQueueBlockIpHostedService(
@@ -18,7 +17,7 @@ public class AzureQueueBlockIpHostedService : BlockIpHostedService
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        _blockIpQueueClient = new QueueClient(_globalSettings.Storage.ConnectionString, "blockip");
+        QueueClient _blockIpQueueClient = new QueueClient(_globalSettings.Storage.ConnectionString, "blockip");
         _unblockIpQueueClient = new QueueClient(_globalSettings.Storage.ConnectionString, "unblockip");
 
         while (!cancellationToken.IsCancellationRequested)
