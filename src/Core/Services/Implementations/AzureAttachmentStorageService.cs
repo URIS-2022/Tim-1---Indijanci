@@ -118,25 +118,25 @@ public class AzureAttachmentStorageService : IAttachmentStorageService
         await blobClient.UploadAsync(stream, new BlobUploadOptions { Metadata = metadata, HttpHeaders = headers });
     }
 
-    public async Task StartShareAttachmentAsync(Guid cipherId, Guid organizationId, CipherAttachment.MetaData data)
+    public async Task StartShareAttachmentAsync(Guid cipherId, Guid organizationId, CipherAttachment.MetaData attachmentData)
     {
-        await InitAsync(data.ContainerName);
-        var source = _attachmentContainers[data.ContainerName].GetBlobClient(
-                BlobName(cipherId, data, organizationId, temp: true));
+        await InitAsync(attachmentData.ContainerName);
+        var source = _attachmentContainers[attachmentData.ContainerName].GetBlobClient(
+                BlobName(cipherId, attachmentData, organizationId, temp: true));
         if (!await source.ExistsAsync())
         {
             return;
         }
 
         await InitAsync(_defaultContainerName);
-        var dest = _attachmentContainers[_defaultContainerName].GetBlobClient(BlobName(cipherId, data));
+        var dest = _attachmentContainers[_defaultContainerName].GetBlobClient(BlobName(cipherId, attachmentData));
         if (!await dest.ExistsAsync())
         {
             return;
         }
 
         var original = _attachmentContainers[_defaultContainerName].GetBlobClient(
-            BlobName(cipherId, data, temp: true));
+            BlobName(cipherId, attachmentData, temp: true));
         await original.DeleteIfExistsAsync();
         await original.StartCopyFromUriAsync(dest.Uri);
 

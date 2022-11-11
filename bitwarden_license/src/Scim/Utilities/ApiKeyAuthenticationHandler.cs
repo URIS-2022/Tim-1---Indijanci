@@ -11,8 +11,7 @@ using Microsoft.Extensions.Options;
 namespace Bit.Scim.Utilities;
 
 public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
-{
-    private readonly IOrganizationRepository _organizationRepository;
+{ 
     private readonly IOrganizationApiKeyRepository _organizationApiKeyRepository;
     private readonly IScimContext _scimContext;
 
@@ -26,7 +25,6 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
         IScimContext scimContext) :
         base(options, logger, encoder, clock)
     {
-        _organizationRepository = organizationRepository;
         _organizationApiKeyRepository = organizationApiKeyRepository;
         _scimContext = scimContext;
     }

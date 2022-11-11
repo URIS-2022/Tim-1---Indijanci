@@ -6,7 +6,10 @@ public abstract class ReadOnlyIdentityUserStore :
     IUserEmailStore<IdentityUser>,
     IUserSecurityStampStore<IdentityUser>
 {
-    public void Dispose() { }
+    public void Dispose() 
+    {
+        GC.SuppressFinalize(this);
+    }
 
     public Task<IdentityResult> CreateAsync(IdentityUser user,
         CancellationToken cancellationToken = default)
