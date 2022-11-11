@@ -771,7 +771,7 @@ public class CipherService : ICipherService
         await _pushService.PushSyncCipherUpdateAsync(cipher, null);
     }
 
-    public async Task SoftDeleteManyAsync(IEnumerable<Guid> cipherIds, Guid deletingUserId, Guid? organizationId, bool orgAdmin)
+    public async Task SoftDeleteManyAsync(IEnumerable<Guid> cipherIds, Guid deletingUserId, Guid? organizationId = null, bool orgAdmin = false)
     {
         var cipherIdsSet = new HashSet<Guid>(cipherIds);
         var deletingCiphers = new List<Cipher>();

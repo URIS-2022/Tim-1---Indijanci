@@ -79,9 +79,9 @@ public class SsoConfigurationDataRequest : IValidatableObject
     public bool? IdpDisableOutboundLogoutRequests { get; set; }
     public bool? IdpWantAuthnRequestsSigned { get; set; }
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext context)
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        var i18nService = context.GetService(typeof(II18nService)) as I18nService;
+        var i18nService = validationContext.GetService(typeof(II18nService)) as I18nService;
 
         if (ConfigType == SsoType.OpenIdConnect)
         {
