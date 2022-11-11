@@ -58,7 +58,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
             IExtendedOptionsMonitorCache<OpenIdConnectOptions>;
         if (_extendedOidcOptionsMonitorCache == null)
         {
-            throw new ArgumentNullException("_extendedOidcOptionsMonitorCache could not be resolved.", "_extendedOidcOptionsMonitorCache");
+            throw new ArgumentNullException("_extendedOidcOptionsMonitorCache", "_extendedOidcOptionsMonitorCache could not be resolved.");
         }
 
         _saml2PostConfigureOptions = saml2PostConfigureOptions;
@@ -66,7 +66,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
             IExtendedOptionsMonitorCache<Saml2Options>;
         if (_extendedSaml2OptionsMonitorCache == null)
         {
-            throw new ArgumentNullException("_extendedSaml2OptionsMonitorCache could not be resolved.", "_extendedSaml2OptionsMonitorCache");
+            throw new ArgumentNullException("_extendedSaml2OptionsMonitorCache could not be resolved.");
         }
 
         _ssoConfigRepository = ssoConfigRepository;
