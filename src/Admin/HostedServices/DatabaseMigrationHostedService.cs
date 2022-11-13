@@ -59,5 +59,7 @@ public class DatabaseMigrationHostedService : IHostedService, IDisposable
     }
 
     public virtual void Dispose()
-    { }
+    {
+        //GC.SuppressFinalize(_dbMigrator);
+    }
 }

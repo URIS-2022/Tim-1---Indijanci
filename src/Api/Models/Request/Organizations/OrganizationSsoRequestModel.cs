@@ -72,7 +72,7 @@ public class SsoConfigurationDataRequest : IValidatableObject
     public Saml2BindingType IdpBindingType { get; set; }
     public string IdpSingleSignOnServiceUrl { get; set; }
     public string IdpSingleLogoutServiceUrl { get; set; }
-    public string IdpArtifactResolutionServiceUrl { get => null; set { IdpArtifactResolutionServiceUrl = value; } }
+    public string IdpArtifactResolutionServiceUrl { get => null; set { } }
     public string IdpX509PublicCert { get; set; }
     public string IdpOutboundSigningAlgorithm { get; set; }
     public bool? IdpAllowUnsolicitedAuthnResponse { get; set; }

@@ -46,7 +46,7 @@ public class SsoConfigurationData
     public string IdpX509PublicCert { get; set; }
     public Saml2BindingType IdpBindingType { get; set; }
     public bool IdpAllowUnsolicitedAuthnResponse { get; set; }
-    public string IdpArtifactResolutionServiceUrl { get => null; set { IdpArtifactResolutionServiceUrl = value; } }
+    public string IdpArtifactResolutionServiceUrl { get => null; set { } }
     public bool IdpDisableOutboundLogoutRequests { get; set; }
     public string IdpOutboundSigningAlgorithm { get; set; }
     public bool IdpWantAuthnRequestsSigned { get; set; }

@@ -303,26 +303,6 @@ public class ToolsController : Controller
         });
     }
 
-    public async Task<IActionResult> TaxRateAddEdit(string stripeTaxRateId = null)
-    {
-        if (string.IsNullOrWhiteSpace(stripeTaxRateId))
-        {
-            return View(new TaxRateAddEditModel());
-        }
-
-        var rate = await _taxRateRepository.GetByIdAsync(stripeTaxRateId);
-        var model = new TaxRateAddEditModel()
-        {
-            StripeTaxRateId = stripeTaxRateId,
-            Country = rate.Country,
-            State = rate.State,
-            PostalCode = rate.PostalCode,
-            Rate = rate.Rate
-        };
-
-        return View(model);
-    }
-
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> TaxRateUpload(IFormFile file)
     {
@@ -423,6 +403,26 @@ public class ToolsController : Controller
         }
 
         return RedirectToAction("TaxRate");
+    }
+
+    public async Task<IActionResult> TaxRateAddEdit(string stripeTaxRateId = null)
+    {
+        if (string.IsNullOrWhiteSpace(stripeTaxRateId))
+        {
+            return View(new TaxRateAddEditModel());
+        }
+
+        var rate = await _taxRateRepository.GetByIdAsync(stripeTaxRateId);
+        var model = new TaxRateAddEditModel()
+        {
+            StripeTaxRateId = stripeTaxRateId,
+            Country = rate.Country,
+            State = rate.State,
+            PostalCode = rate.PostalCode,
+            Rate = rate.Rate
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> TaxRateArchive(string stripeTaxRateId)

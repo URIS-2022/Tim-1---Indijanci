@@ -97,6 +97,6 @@ public class AzureQueueMailHostedService : IHostedService
 
     private async Task<QueueMessage[]> RetrieveMessagesAsync()
     {
-        return (await _mailQueueClient.ReceiveMessagesAsync(maxMessages: 32))?.Value ?? new QueueMessage[] { };
+        return (await _mailQueueClient.ReceiveMessagesAsync(maxMessages: 32))?.Value ?? Array.Empty<QueueMessage>();
     }
 }
