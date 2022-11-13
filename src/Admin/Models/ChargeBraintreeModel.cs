@@ -15,13 +15,10 @@ public class ChargeBraintreeModel : IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (Id != null)
+        if (Id != null && (Id.Length != 36 || (Id[0] != 'o' && Id[0] != 'u') ||
+                !Guid.TryParse(Id.AsSpan(1, 32), out var guid)))
         {
-            if (Id.Length != 36 || (Id[0] != 'o' && Id[0] != 'u') ||
-                !Guid.TryParse(Id.AsSpan(1, 32), out var guid))
-            {
-                yield return new ValidationResult("Customer Id is not a valid format.");
-            }
+            yield return new ValidationResult("Customer Id is not a valid format.");
         }
     }
 }

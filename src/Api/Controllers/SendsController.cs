@@ -110,10 +110,6 @@ public class SendsController : Controller
             await Task.Delay(2000);
             throw new BadRequestException("Invalid password.");
         }
-        if (send == null)
-        {
-            throw new NotFoundException();
-        }
 
         return new ObjectResult(new SendFileDownloadDataResponseModel()
         {
