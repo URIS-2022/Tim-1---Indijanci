@@ -13,6 +13,8 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     private CancellationTokenSource _cts;
     private HttpClient _httpClient = new HttpClient();
 
+    private string URL = "https://api.cloudflare.com/";
+
     public BlockIpHostedService(
         ILogger<BlockIpHostedService> logger,
         IOptions<AdminSettings> adminSettings,
@@ -42,7 +44,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     }
 
     public virtual void Dispose()
-    { }
+    {}
 
     protected abstract Task ExecuteAsync(CancellationToken cancellationToken);
 
@@ -53,7 +55,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
         request.Headers.Add("X-Auth-Email", _adminSettings.Cloudflare.AuthEmail);
         request.Headers.Add("X-Auth-Key", _adminSettings.Cloudflare.AuthKey);
         request.Method = HttpMethod.Post;
-        request.RequestUri = new Uri("https://api.cloudflare.com/" +
+        request.RequestUri = new Uri(URL +
             $"client/v4/zones/{_adminSettings.Cloudflare.ZoneId}/firewall/access_rules/rules");
 
         request.Content = JsonContent.Create(new
@@ -97,7 +99,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             request.Headers.Add("X-Auth-Email", _adminSettings.Cloudflare.AuthEmail);
             request.Headers.Add("X-Auth-Key", _adminSettings.Cloudflare.AuthKey);
             request.Method = HttpMethod.Get;
-            request.RequestUri = new Uri("https://api.cloudflare.com/" +
+            request.RequestUri = new Uri(URL +
                 $"client/v4/zones/{_adminSettings.Cloudflare.ZoneId}/firewall/access_rules/rules?" +
                 $"configuration_target=ip&configuration_value={message}");
 
@@ -132,7 +134,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
         request.Headers.Add("X-Auth-Email", _adminSettings.Cloudflare.AuthEmail);
         request.Headers.Add("X-Auth-Key", _adminSettings.Cloudflare.AuthKey);
         request.Method = HttpMethod.Delete;
-        request.RequestUri = new Uri("https://api.cloudflare.com/" +
+        request.RequestUri = new Uri(URL +
             $"client/v4/zones/{_adminSettings.Cloudflare.ZoneId}/firewall/access_rules/rules/{ruleId}");
         await _httpClient.SendAsync(request, cancellationToken);
     }

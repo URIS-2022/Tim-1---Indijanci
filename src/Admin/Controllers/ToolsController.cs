@@ -303,13 +303,18 @@ public class ToolsController : Controller
         });
     }
 
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> TaxRateUpload(IFormFile file)
+    private void CheckFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
             throw new ArgumentNullException(nameof(file));
         }
+    }
+
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> TaxRateUpload(IFormFile file)
+    {
+        CheckFile(file);
 
         // Build rates and validate them first before updating DB & Stripe
         var taxRateUpdates = new List<TaxRate>();

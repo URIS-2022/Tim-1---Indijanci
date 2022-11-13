@@ -16,17 +16,12 @@ public class HibpController : Controller
 {
     private const string HibpBreachApi = "https://haveibeenpwned.com/api/v3/breachedaccount/{0}" +
         "?truncateResponse=false&includeUnverified=false";
-    private static HttpClient _httpClient;
+    private static HttpClient _httpClient = new HttpClient();
 
     private readonly IUserService _userService;
     private readonly ICurrentContext _currentContext;
     private readonly GlobalSettings _globalSettings;
     private readonly string _userAgent;
-
-    static HibpController()
-    {
-        _httpClient = new HttpClient();
-    }
 
     public HibpController(
         IUserService userService,

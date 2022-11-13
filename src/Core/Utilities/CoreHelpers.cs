@@ -404,12 +404,12 @@ public static class CoreHelpers
             return string.Empty;
         }
 
-        if (val.GetType() == typeof(DateTime))
+        if (val is DateTime)
         {
             return ToEpocSeconds((DateTime)val).ToString();
         }
 
-        if (val.GetType() == typeof(bool))
+        if (val is bool)
         {
             return val.ToString().ToLowerInvariant();
         }
