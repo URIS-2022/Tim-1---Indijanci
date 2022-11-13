@@ -119,7 +119,7 @@ public class PatchGroupCommand : IPatchGroupCommand
         }
     }
 
-    private List<Guid> GetOperationValueIds(JsonElement objArray)
+    private static List<Guid> GetOperationValueIds(JsonElement objArray)
     {
         var ids = new List<Guid>();
         foreach (var obj in objArray.EnumerateArray())
@@ -135,7 +135,7 @@ public class PatchGroupCommand : IPatchGroupCommand
         return ids;
     }
 
-    private Guid? GetOperationPathId(string path)
+    private static Guid? GetOperationPathId(string path)
     {
         // Parse Guid from string like: members[value eq "{GUID}"}]
         if (Guid.TryParse(path.Substring(18).Replace("\"]", string.Empty), out var id))

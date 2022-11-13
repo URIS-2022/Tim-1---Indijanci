@@ -9,6 +9,13 @@
         {
             <table class="table">
                 <tbody>
+					<tr>
+						<th>Date</th>
+						<th>Number</th>
+						<th>Amount</th>
+						<th>Paid</th>
+						<th>Download</th>
+					</tr>
                     @foreach(var invoice in Model.BillingInfo.Invoices)
                     {
                         <tr>

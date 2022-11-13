@@ -72,16 +72,16 @@ public class SsoConfigurationDataRequest : IValidatableObject
     public Saml2BindingType IdpBindingType { get; set; }
     public string IdpSingleSignOnServiceUrl { get; set; }
     public string IdpSingleLogoutServiceUrl { get; set; }
-    public string IdpArtifactResolutionServiceUrl { get => null; set { /*IGNORE*/ } }
+    public string IdpArtifactResolutionServiceUrl { get => null; set { } }
     public string IdpX509PublicCert { get; set; }
     public string IdpOutboundSigningAlgorithm { get; set; }
     public bool? IdpAllowUnsolicitedAuthnResponse { get; set; }
     public bool? IdpDisableOutboundLogoutRequests { get; set; }
     public bool? IdpWantAuthnRequestsSigned { get; set; }
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext context)
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        var i18nService = context.GetService(typeof(II18nService)) as I18nService;
+        var i18nService = validationContext.GetService(typeof(II18nService)) as I18nService;
 
         if (ConfigType == SsoType.OpenIdConnect)
         {
@@ -136,7 +136,7 @@ public class SsoConfigurationDataRequest : IValidatableObject
                 try
                 {
                     var certData = CoreHelpers.Base64UrlDecode(StripPemCertificateElements(IdpX509PublicCert));
-                    new X509Certificate2(certData);
+                    _ = new X509Certificate2(certData);
                 }
                 catch (FormatException)
                 {

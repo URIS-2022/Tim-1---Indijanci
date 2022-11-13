@@ -125,6 +125,7 @@ public class GroupsController : Controller
 
     [HttpDelete("{id}")]
     [HttpPost("{id}/delete")]
+    [Obsolete("IDeleteGroupCommand should be used instead. To be removed by EC-608.")]
     public async Task Delete(string orgId, string id)
     {
         var group = await _groupRepository.GetByIdAsync(new Guid(id));

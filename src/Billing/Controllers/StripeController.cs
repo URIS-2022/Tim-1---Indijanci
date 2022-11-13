@@ -263,17 +263,17 @@ public class StripeController : Controller
                 GatewayId = charge.Id
             };
 
-            if (charge.Source != null && charge.Source is Card card)
+            if (charge.Source is Card card)
             {
                 tx.PaymentMethodType = PaymentMethodType.Card;
                 tx.Details = $"{card.Brand}, *{card.Last4}";
             }
-            else if (charge.Source != null && charge.Source is BankAccount bankAccount)
+            else if (charge.Source is BankAccount bankAccount)
             {
                 tx.PaymentMethodType = PaymentMethodType.BankAccount;
                 tx.Details = $"{bankAccount.BankName}, *{bankAccount.Last4}";
             }
-            else if (charge.Source != null && charge.Source is Source source)
+            else if (charge.Source is Source source)
             {
                 if (source.Card != null)
                 {

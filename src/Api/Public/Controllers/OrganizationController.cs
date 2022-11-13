@@ -41,7 +41,7 @@ public class OrganizationController : Controller
     public async Task<IActionResult> Import([FromBody] OrganizationImportRequestModel model)
     {
         if (!_globalSettings.SelfHosted && !model.LargeImport &&
-            (model.Groups.Count() > 2000 || model.Members.Count(u => !u.Deleted) > 2000))
+            (model.Groups.Length > 2000 || model.Members.Count(u => !u.Deleted) > 2000))
         {
             throw new BadRequestException("You cannot import this much data at once.");
         }

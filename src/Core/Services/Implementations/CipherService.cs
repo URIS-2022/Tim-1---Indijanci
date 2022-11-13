@@ -72,7 +72,7 @@ public class CipherService : ICipherService
             throw new BadRequestException("You do not have permissions to edit this.");
         }
 
-        if (cipher.Id == default(Guid))
+        if (cipher.Id == Guid.Empty)
         {
             if (cipher.OrganizationId.HasValue && collectionIds != null)
             {
@@ -483,7 +483,7 @@ public class CipherService : ICipherService
     }
 
     public async Task ShareAsync(Cipher originalCipher, Cipher cipher, Guid organizationId,
-        IEnumerable<Guid> collectionIds, Guid sharingUserId, DateTime? lastKnownRevisionDate)
+        IEnumerable<Guid> collectionIds, Guid userId, DateTime? lastKnownRevisionDate)
     {
         var attachments = cipher.GetAttachments();
         var hasOldAttachments = attachments?.Any(a => a.Key == null) ?? false;
@@ -493,10 +493,10 @@ public class CipherService : ICipherService
 
         try
         {
-            await ValidateCipherCanBeShared(cipher, sharingUserId, organizationId, lastKnownRevisionDate);
+            await ValidateCipherCanBeShared(cipher, userId, organizationId, lastKnownRevisionDate);
 
             // Sproc will not save this UserId on the cipher. It is used limit scope of the collectionIds.
-            cipher.UserId = sharingUserId;
+            cipher.UserId = userId;
             cipher.OrganizationId = organizationId;
             cipher.RevisionDate = DateTime.UtcNow;
             if (!await _cipherRepository.ReplaceAsync(cipher, collectionIds))
@@ -539,7 +539,7 @@ public class CipherService : ICipherService
 
             if (updatedCipher)
             {
-                await _userRepository.UpdateStorageAsync(sharingUserId);
+                await _userRepository.UpdateStorageAsync(userId);
                 await _organizationRepository.UpdateStorageAsync(organizationId);
             }
 
@@ -771,7 +771,7 @@ public class CipherService : ICipherService
         await _pushService.PushSyncCipherUpdateAsync(cipher, null);
     }
 
-    public async Task SoftDeleteManyAsync(IEnumerable<Guid> cipherIds, Guid deletingUserId, Guid? organizationId, bool orgAdmin)
+    public async Task SoftDeleteManyAsync(IEnumerable<Guid> cipherIds, Guid deletingUserId, Guid? organizationId = null, bool orgAdmin = false)
     {
         var cipherIdsSet = new HashSet<Guid>(cipherIds);
         var deletingCiphers = new List<Cipher>();

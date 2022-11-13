@@ -77,7 +77,7 @@ public class AmazonSqsBlockIpHostedService : BlockIpHostedService
                 }
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(15));
+            await Task.Delay(TimeSpan.FromSeconds(15), cancellationToken);
         }
     }
 }

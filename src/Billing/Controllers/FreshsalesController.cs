@@ -64,8 +64,7 @@ public class FreshsalesController : Controller
             var lead = leadResponse.Lead;
 
             var primaryEmail = lead.Emails
-                .Where(e => e.IsPrimary)
-                .FirstOrDefault();
+                .FirstOrDefault(e => e.IsPrimary);
 
             if (primaryEmail == null)
             {

@@ -170,8 +170,6 @@ public class TwoFactorController : Controller
     public async Task<TwoFactorDuoResponseModel> GetOrganizationDuo(string id,
         [FromBody] SecretVerificationRequestModel model)
     {
-        var user = await CheckAsync(model, false);
-
         var orgIdGuid = new Guid(id);
         if (!await _currentContext.ManagePolicies(orgIdGuid))
         {

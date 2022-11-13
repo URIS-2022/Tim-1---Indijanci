@@ -12,15 +12,10 @@ public class CipherAttachment
 
     public class MetaData
     {
-        private long _size;
 
         // We serialize Size as a string since JSON (or Javascript) doesn't support full precision for long numbers
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString)]
-        public long Size
-        {
-            get { return _size; }
-            set { _size = value; }
-        }
+        public long Size { get; set; }
 
         public string FileName { get; set; }
         public string Key { get; set; }

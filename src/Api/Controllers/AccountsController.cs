@@ -861,7 +861,7 @@ public class AccountsController : Controller
     }
 
     [HttpPost("verify-otp")]
-    public async Task VerifyOTP([FromBody] VerifyOTPRequestModel model)
+    public async Task VerifyOTP([FromBody] VerifyOtpRequestModel model)
     {
         var user = await _userService.GetUserByPrincipalAsync(User);
         if (user is not { UsesKeyConnector: true })

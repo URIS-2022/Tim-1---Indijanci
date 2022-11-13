@@ -20,7 +20,6 @@ public class GroupsController : Controller
     private readonly IPatchGroupCommand _patchGroupCommand;
     private readonly IPostGroupCommand _postGroupCommand;
     private readonly IPutGroupCommand _putGroupCommand;
-    private readonly ILogger<GroupsController> _logger;
 
     public GroupsController(
         IGroupRepository groupRepository,
@@ -37,7 +36,6 @@ public class GroupsController : Controller
         _patchGroupCommand = patchGroupCommand;
         _postGroupCommand = postGroupCommand;
         _putGroupCommand = putGroupCommand;
-        _logger = logger;
     }
 
     [HttpGet("{id}")]

@@ -13,7 +13,7 @@ public class CipherFieldModel
         Type = data.Type;
         Name = data.Name;
         Value = data.Value;
-        LinkedId = data.LinkedId ?? null;
+        LinkedId = data.LinkedId;
     }
 
     public FieldType Type { get; set; }
@@ -30,7 +30,7 @@ public class CipherFieldModel
             Type = Type,
             Name = Name,
             Value = Value,
-            LinkedId = LinkedId ?? null,
+            LinkedId = LinkedId
         };
     }
 }

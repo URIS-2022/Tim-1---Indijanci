@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Security.Authentication;
+using System.Security.Claims;
 using Bit.Core;
 using Bit.Core.Entities;
 using Bit.Core.Enums;
@@ -118,7 +119,7 @@ public class AccountController : Controller
 
             // Validate Authentication Scheme exists and is loaded (cache)
             var scheme = await _schemeProvider.GetSchemeAsync(organization.Id.ToString());
-            if (scheme == null || !(scheme is IDynamicAuthenticationScheme dynamicScheme))
+            if (!(scheme is IDynamicAuthenticationScheme dynamicScheme))
             {
                 return InvalidJson("NoSchemeOrHandlerForSsoConfigurationFoundError");
             }
@@ -158,7 +159,7 @@ public class AccountController : Controller
         if (!context.Parameters.AllKeys.Contains("domain_hint") ||
             string.IsNullOrWhiteSpace(context.Parameters["domain_hint"]))
         {
-            throw new Exception(_i18nService.T("NoDomainHintProvided"));
+            throw new ArgumentNullException(_i18nService.T("NoDomainHintProvided"));
         }
 
         var ssoToken = context.Parameters[SsoTokenable.TokenIdentifier];
@@ -229,7 +230,7 @@ public class AccountController : Controller
             AuthenticationSchemes.BitwardenExternalCookieAuthenticationScheme);
         if (result?.Succeeded != true)
         {
-            throw new Exception(_i18nService.T("ExternalAuthenticationError"));
+            throw new AuthenticationException(_i18nService.T("ExternalAuthenticationError"));
         }
 
         // Debugging
@@ -243,7 +244,7 @@ public class AccountController : Controller
             // This might be where you might initiate a custom workflow for user registration
             // in this sample we don't show how that would be done, as our sample implementation
             // simply auto-provisions new external user
-            var userIdentifier = result.Properties.Items.Keys.Contains("user_identifier") ?
+            var userIdentifier = result.Properties.Items.ContainsKey("user_identifier") ?
                 result.Properties.Items["user_identifier"] : null;
             user = await AutoProvisionUserAsync(provider, providerUserId, claims, userIdentifier, ssoConfigData);
         }
@@ -389,7 +390,7 @@ public class AccountController : Controller
     {
         var name = GetName(claims, config.GetAdditionalNameClaimTypes());
         var email = GetEmailAddress(claims, config.GetAdditionalEmailClaimTypes());
-        if (string.IsNullOrWhiteSpace(email) && providerUserId.Contains("@"))
+        if (string.IsNullOrWhiteSpace(email) && providerUserId.Contains('@'))
         {
             email = providerUserId;
         }
@@ -475,7 +476,6 @@ public class AccountController : Controller
                 throw new Exception(_i18nService.T("UserAlreadyInvited", email, organization.Name));
             }
 
-            // Accepted or Confirmed - create SSO link and return;
             await CreateSsoUserRecord(providerUserId, existingUser.Id, orgId, orgUser);
             return existingUser;
         }
@@ -570,7 +570,7 @@ public class AccountController : Controller
         });
     }
 
-    private string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
+    private static string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
         var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains("@"));
 
@@ -658,18 +658,6 @@ public class AccountController : Controller
             localSignInProps.StoreTokens(
                 new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
         }
-    }
-
-    private async Task<string> GetProviderAsync(string returnUrl)
-    {
-        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-        if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
-        {
-            return context.IdP;
-        }
-        var schemes = await _schemeProvider.GetAllSchemesAsync();
-        var providers = schemes.Select(x => x.Name).ToList();
-        return providers.FirstOrDefault();
     }
 
     private async Task<(string, string, string)> GetLoggedOutDataAsync(string logoutId)

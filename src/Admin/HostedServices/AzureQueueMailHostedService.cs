@@ -53,7 +53,8 @@ public class AzureQueueMailHostedService : IHostedService
         QueueMessage[] mailMessages;
         while (!cancellationToken.IsCancellationRequested)
         {
-            if (!(mailMessages = await RetrieveMessagesAsync()).Any())
+            mailMessages = await RetrieveMessagesAsync();
+            if (!mailMessages.Any())
             {
                 await Task.Delay(TimeSpan.FromSeconds(15));
             }
@@ -96,6 +97,6 @@ public class AzureQueueMailHostedService : IHostedService
 
     private async Task<QueueMessage[]> RetrieveMessagesAsync()
     {
-        return (await _mailQueueClient.ReceiveMessagesAsync(maxMessages: 32))?.Value ?? new QueueMessage[] { };
+        return (await _mailQueueClient.ReceiveMessagesAsync(maxMessages: 32))?.Value ?? Array.Empty<QueueMessage>();
     }
 }

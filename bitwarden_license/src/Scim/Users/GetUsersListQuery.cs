@@ -23,7 +23,7 @@ public class GetUsersListQuery : IGetUsersListQuery
             if (filter.StartsWith("userName eq "))
             {
                 usernameFilter = filter.Substring(12).Trim('"').ToLowerInvariant();
-                if (usernameFilter.Contains("@"))
+                if (usernameFilter.Contains('@'))
                 {
                     emailFilter = usernameFilter;
                 }

@@ -4,7 +4,7 @@ namespace Bit.Scim.Models;
 
 public abstract class BaseScimGroupModel : BaseScimModel
 {
-    public BaseScimGroupModel(bool initSchema = false)
+    protected BaseScimGroupModel(bool initSchema = false)
     {
         if (initSchema)
         {
