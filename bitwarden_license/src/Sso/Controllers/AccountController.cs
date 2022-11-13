@@ -390,7 +390,7 @@ public class AccountController : Controller
     {
         var name = GetName(claims, config.GetAdditionalNameClaimTypes());
         var email = GetEmailAddress(claims, config.GetAdditionalEmailClaimTypes());
-        if (string.IsNullOrWhiteSpace(email) && providerUserId.Contains("@"))
+        if (string.IsNullOrWhiteSpace(email) && providerUserId.Contains('@'))
         {
             email = providerUserId;
         }
@@ -570,7 +570,7 @@ public class AccountController : Controller
         });
     }
 
-    private string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
+    private static string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
         var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains("@"));
 

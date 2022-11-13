@@ -17,7 +17,7 @@ namespace Bit.Commercial.Core.Services;
 
 public class ProviderService : IProviderService
 {
-    protected static PlanType[] ProviderDisllowedOrganizationTypes = new[] { PlanType.Free, PlanType.FamiliesAnnually, PlanType.FamiliesAnnually2019 };
+    protected static readonly PlanType[] ProviderDisllowedOrganizationTypes = new[] { PlanType.Free, PlanType.FamiliesAnnually, PlanType.FamiliesAnnually2019 };
 
     private readonly IDataProtector _dataProtector;
     private readonly IMailService _mailService;
