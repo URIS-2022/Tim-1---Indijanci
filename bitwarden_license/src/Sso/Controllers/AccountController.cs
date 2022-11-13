@@ -572,7 +572,7 @@ public class AccountController : Controller
 
     private static string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
-        var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains("@"));
+        var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains('@'));
 
         var email = filteredClaims.GetFirstMatch(additionalClaimTypes.ToArray()) ??
             filteredClaims.GetFirstMatch(JwtClaimTypes.Email, ClaimTypes.Email,
