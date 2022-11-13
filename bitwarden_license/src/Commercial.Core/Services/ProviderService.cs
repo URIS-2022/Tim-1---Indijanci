@@ -498,7 +498,7 @@ public class ProviderService : IProviderService
         return confirmedOwnersIds.Except(providerUserIds).Any();
     }
 
-    private void ThrowOnInvalidPlanType(PlanType requestedType)
+    private static void ThrowOnInvalidPlanType(PlanType requestedType)
     {
         if (ProviderDisllowedOrganizationTypes.Contains(requestedType))
         {
