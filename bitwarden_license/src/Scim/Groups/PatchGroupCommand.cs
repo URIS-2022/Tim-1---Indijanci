@@ -114,8 +114,8 @@ public class PatchGroupCommand : IPatchGroupCommand
 
         if (!operationHandled)
         {
-            _logger.LogWarning("Group patch operation not handled: {0} : ",
-                string.Join(", ", model.Operations.Select(o => $"{o.Op}:{o.Path}")));
+            _logger.LogWarning($"Group patch operation not handled:" +
+                $" {string.Join(", ", model.Operations.Select(o => $"{o.Op}:{o.Path}"))} :");
         }
     }
 
