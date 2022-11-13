@@ -8,7 +8,7 @@ namespace Bit.Admin.Jobs;
 
 public class DatabaseExpiredSponsorshipsJob : BaseJob
 {
-    private GlobalSettings _globalSettings;
+    private readonly GlobalSettings _globalSettings;
     private readonly IMaintenanceRepository _maintenanceRepository;
 
     public DatabaseExpiredSponsorshipsJob(

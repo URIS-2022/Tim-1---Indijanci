@@ -53,12 +53,9 @@ public static class MultipartFormDataHelper
                             }
                         }
 
-                        secondSection = null;
                     }
                 }
             }
-
-            firstSection = null;
         }
     }
 
