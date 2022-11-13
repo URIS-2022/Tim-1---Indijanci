@@ -8,7 +8,7 @@ namespace Bit.Admin.Jobs;
 public class AliveJob : BaseJob
 {
     private readonly GlobalSettings _globalSettings;
-    private HttpClient _httpClient = new HttpClient();
+    private readonly HttpClient _httpClient = new HttpClient();
 
     public AliveJob(
         GlobalSettings globalSettings,
