@@ -116,7 +116,7 @@ public class ProviderService : IProviderService
 
     public async Task UpdateAsync(Provider provider, bool updateBilling = false)
     {
-        if (provider.Id == default)
+        if (provider.Id == Guid.Empty)
         {
             throw new ArgumentException("Cannot create provider this way.");
         }
@@ -464,7 +464,7 @@ public class ProviderService : IProviderService
 
     public async Task LogProviderAccessToOrganizationAsync(Guid organizationId)
     {
-        if (organizationId == default)
+        if (organizationId == Guid.Empty)
         {
             return;
         }
