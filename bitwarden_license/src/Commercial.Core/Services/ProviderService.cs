@@ -132,7 +132,6 @@ public class ProviderService : IProviderService
         }
 
         var emails = invite?.UserIdentifiers;
-        var invitingUser = await _providerUserRepository.GetByProviderUserAsync(invite.ProviderId, invite.InvitingUserId);
 
         var provider = await _providerRepository.GetByIdAsync(invite.ProviderId);
         if (provider == null || emails == null || !emails.Any())
