@@ -46,6 +46,7 @@ public class AzureQueueMailHostedService : IHostedService
         cancellationToken.ThrowIfCancellationRequested();
     }
 
+    [Obsolete]
     private async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _mailQueueClient = new QueueClient(_globalSettings.Mail.ConnectionString, "mail");
