@@ -12,7 +12,7 @@ public abstract class ReadOnlyIdentityUserStore :
     }
 
     public Task<IdentityResult> CreateAsync(IdentityUser user,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
