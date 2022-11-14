@@ -13,7 +13,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     private CancellationTokenSource _cts;
     private HttpClient _httpClient = new HttpClient();
 
-    public BlockIpHostedService(
+    protected BlockIpHostedService(
         ILogger<BlockIpHostedService> logger,
         IOptions<AdminSettings> adminSettings,
         GlobalSettings globalSettings)

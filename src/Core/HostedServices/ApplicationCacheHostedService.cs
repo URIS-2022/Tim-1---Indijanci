@@ -64,7 +64,10 @@ public class ApplicationCacheHostedService : IHostedService, IDisposable
         {
             await _managementClient.DeleteSubscriptionAsync(_topicName, _subName, cancellationToken);
         }
-        catch { }
+        catch (Exception exc)
+        { 
+            Logger.Log(exc);
+        }
     }
 
     public virtual void Dispose()

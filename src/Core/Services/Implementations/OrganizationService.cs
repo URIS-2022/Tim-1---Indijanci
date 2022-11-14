@@ -988,7 +988,9 @@ public class OrganizationService : IOrganizationService
                 await _referenceEventService.RaiseEventAsync(
                     new ReferenceEvent(ReferenceEventType.DeleteAccount, organization));
             }
-            catch (GatewayException) { }
+            catch (GatewayException) { 
+                Console.WriteLine("Error occured");
+            }
         }
 
         await _organizationRepository.DeleteAsync(organization);

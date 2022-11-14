@@ -612,6 +612,31 @@ public class CiphersController : Controller
         };
     }
 
+    [HttpPost("{id}/attachment")]
+    [Obsolete("Deprecated Attachments API", false)]
+    [RequestSizeLimit(Constants.FileSize101mb)]
+    [DisableFormValueModelBinding]
+    public async Task<CipherResponseModel> PostAttachment(string id)
+    {
+        ValidateAttachment();
+
+        var idGuid = new Guid(id);
+        var userId = _userService.GetProperUserId(User).Value;
+        var cipher = await _cipherRepository.GetByIdAsync(idGuid, userId);
+        if (cipher == null)
+        {
+            throw new NotFoundException();
+        }
+
+        await Request.GetFileAsync(async (stream, fileName, key) =>
+        {
+            await _cipherService.CreateAttachmentAsync(cipher, stream, fileName, key,
+                    Request.ContentLength.GetValueOrDefault(0), userId);
+        });
+
+        return new CipherResponseModel(cipher, _globalSettings);
+    }
+
     [HttpGet("{id}/attachment/{attachmentId}/renew")]
     public async Task<AttachmentUploadDataResponseModel> RenewFileUploadUrl(string id, string attachmentId)
     {
@@ -658,30 +683,6 @@ public class CiphersController : Controller
         });
     }
 
-    [HttpPost("{id}/attachment")]
-    [Obsolete("Deprecated Attachments API", false)]
-    [RequestSizeLimit(Constants.FileSize101mb)]
-    [DisableFormValueModelBinding]
-    public async Task<CipherResponseModel> PostAttachment(string id)
-    {
-        ValidateAttachment();
-
-        var idGuid = new Guid(id);
-        var userId = _userService.GetProperUserId(User).Value;
-        var cipher = await _cipherRepository.GetByIdAsync(idGuid, userId);
-        if (cipher == null)
-        {
-            throw new NotFoundException();
-        }
-
-        await Request.GetFileAsync(async (stream, fileName, key) =>
-        {
-            await _cipherService.CreateAttachmentAsync(cipher, stream, fileName, key,
-                    Request.ContentLength.GetValueOrDefault(0), userId);
-        });
-
-        return new CipherResponseModel(cipher, _globalSettings);
-    }
 
     [HttpPost("{id}/attachment-admin")]
     [RequestSizeLimit(Constants.FileSize101mb)]

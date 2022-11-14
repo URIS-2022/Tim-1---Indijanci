@@ -65,17 +65,5 @@ public class AmazonSqsBlockIpService : IBlockIpService, IDisposable
         }
     }
 
-    private async Task InitAsync()
-    {
-        if (_didInit)
-        {
-            return;
-        }
-
-        var blockIpQueue = await _client.GetQueueUrlAsync("block-ip");
-        _blockIpQueueUrl = blockIpQueue.QueueUrl;
-        var unblockIpQueue = await _client.GetQueueUrlAsync("unblock-ip");
-        _unblockIpQueueUrl = unblockIpQueue.QueueUrl;
-        _didInit = true;
-    }
+   
 }

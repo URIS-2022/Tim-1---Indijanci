@@ -44,7 +44,7 @@ public class AttachmentResponseModel : ResponseModel
         var attachments = cipher.GetAttachments();
         if (attachments == null)
         {
-            return null;
+            return Enumerable.Empty<AttachmentResponseModel>();
         }
 
         return attachments.Select(a => new AttachmentResponseModel(a.Key, a.Value, cipher, globalSettings));

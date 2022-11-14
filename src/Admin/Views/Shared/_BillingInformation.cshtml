@@ -44,6 +44,13 @@
         @if(Model.BillingInfo.Transactions?.Any() ?? false)
         {
             <table class="table">
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Payment Method Type</th>
+                    <th>Details</th>
+                    <th>Amount</th>
+                </tr>
                 <tbody>
                     @foreach(var transaction in Model.BillingInfo.Transactions)
                     {

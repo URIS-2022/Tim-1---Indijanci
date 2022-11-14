@@ -189,7 +189,7 @@ public class CollectionsController : Controller
 
     private async Task<bool> CanCreateCollection(Guid orgId, Guid collectionId)
     {
-        if (collectionId != default)
+        if (collectionId != default(Guid))
         {
             return false;
         }

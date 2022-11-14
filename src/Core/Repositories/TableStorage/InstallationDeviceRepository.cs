@@ -78,6 +78,7 @@ public class InstallationDeviceRepository : IInstallationDeviceRepository
         }
         catch (StorageException e) when (e.RequestInformation.HttpStatusCode != (int)HttpStatusCode.NotFound)
         {
+            log.LogError(e);
             throw;
         }
     }

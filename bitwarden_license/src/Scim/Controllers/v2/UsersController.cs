@@ -23,7 +23,7 @@ public class UsersController : Controller
     private readonly IDeleteOrganizationUserCommand _deleteOrganizationUserCommand;
     private readonly IPatchUserCommand _patchUserCommand;
     private readonly IPostUserCommand _postUserCommand;
-    private readonly ILogger<UsersController> _logger;
+  
 
     public UsersController(
         IUserService userService,
@@ -33,7 +33,7 @@ public class UsersController : Controller
         IDeleteOrganizationUserCommand deleteOrganizationUserCommand,
         IPatchUserCommand patchUserCommand,
         IPostUserCommand postUserCommand,
-        ILogger<UsersController> logger)
+        
     {
         _userService = userService;
         _organizationUserRepository = organizationUserRepository;
@@ -42,7 +42,7 @@ public class UsersController : Controller
         _deleteOrganizationUserCommand = deleteOrganizationUserCommand;
         _patchUserCommand = patchUserCommand;
         _postUserCommand = postUserCommand;
-        _logger = logger;
+        
     }
 
     [HttpGet("{id}")]

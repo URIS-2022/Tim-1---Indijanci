@@ -18,7 +18,7 @@ public class LicensingService : ILicensingService
     private readonly IGlobalSettings _globalSettings;
     private readonly IUserRepository _userRepository;
     private readonly IOrganizationRepository _organizationRepository;
-    private readonly IOrganizationUserRepository _organizationUserRepository;
+    
     private readonly IMailService _mailService;
     private readonly ILogger<LicensingService> _logger;
 

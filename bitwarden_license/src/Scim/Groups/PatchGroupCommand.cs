@@ -124,12 +124,12 @@ public class PatchGroupCommand : IPatchGroupCommand
         var ids = new List<Guid>();
         foreach (var obj in objArray.EnumerateArray())
         {
-            if (obj.TryGetProperty("value", out var valueProperty))
+            if (obj.TryGetProperty("value", out var valueProperty) && valueProperty.TryGetGuid(out var guid))
             {
-                if (valueProperty.TryGetGuid(out var guid))
-                {
+                
+                
                     ids.Add(guid);
-                }
+                
             }
         }
         return ids;
