@@ -63,6 +63,7 @@ public class CipherRequestModel
         return existingCipher;
     }
 
+    [Obsolete("Attachments obsolete")]
     public Cipher ToCipher(Cipher existingCipher)
     {
         switch (existingCipher.Type)
