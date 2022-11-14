@@ -44,7 +44,9 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     }
 
     public virtual void Dispose()
-    {}
+    {
+        GC.SuppressFinalize(this);
+    }
 
     protected abstract Task ExecuteAsync(CancellationToken cancellationToken);
 
