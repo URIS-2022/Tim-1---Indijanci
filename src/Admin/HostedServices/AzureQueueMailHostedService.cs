@@ -86,7 +86,7 @@ public class AzureQueueMailHostedService : IHostedService
                     // TODO: retries?
                 }
 
-                await _mailQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt);
+                await _mailQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt, cancellationToken);
 
                 if (cancellationToken.IsCancellationRequested)
                 {
