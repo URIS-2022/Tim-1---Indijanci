@@ -31,6 +31,15 @@ public class CollectionsController : Controller
         _currentContext = currentContext;
     }
 
+    [HttpGet("")]
+    public async Task<ListResponseModel<CollectionResponseModel>> Get(Guid orgId)
+    {
+        IEnumerable<Collection> orgCollections = await _collectionService.GetOrganizationCollections(orgId);
+
+        var responses = orgCollections.Select(c => new CollectionResponseModel(c));
+        return new ListResponseModel<CollectionResponseModel>(responses);
+    }
+
     [HttpGet("{id}")]
     public async Task<CollectionResponseModel> Get(Guid orgId, Guid id)
     {
@@ -72,14 +81,6 @@ public class CollectionsController : Controller
         }
     }
 
-    [HttpGet("")]
-    public async Task<ListResponseModel<CollectionResponseModel>> Get(Guid orgId)
-    {
-        IEnumerable<Collection> orgCollections = await _collectionService.GetOrganizationCollections(orgId);
-
-        var responses = orgCollections.Select(c => new CollectionResponseModel(c));
-        return new ListResponseModel<CollectionResponseModel>(responses);
-    }
 
     [HttpGet("~/collections")]
     public async Task<ListResponseModel<CollectionDetailsResponseModel>> GetUser()
