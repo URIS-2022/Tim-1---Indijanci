@@ -29,6 +29,7 @@ public class CipherRequestModel
     public IEnumerable<CipherFieldModel> Fields { get; set; }
     public IEnumerable<CipherPasswordHistoryModel> PasswordHistory { get; set; }
 
+    [Obsolete("Generic obsolete message")]
     public Dictionary<string, string> Attachments { get; set; }
     // TODO: Rename to Attachments whenever the above is finally removed.
     public Dictionary<string, CipherAttachmentModel> Attachments2 { get; set; }
