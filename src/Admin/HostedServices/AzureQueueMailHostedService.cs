@@ -56,7 +56,7 @@ public class AzureQueueMailHostedService : IHostedService
             mailMessages = await RetrieveMessagesAsync();
             if (!mailMessages.Any())
             {
-                await Task.Delay(TimeSpan.FromSeconds(15));
+                await Task.Delay(TimeSpan.FromSeconds(15), cancellationToken);
             }
 
             foreach (var message in mailMessages)
