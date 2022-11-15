@@ -406,7 +406,7 @@ public class AccountController : Controller
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new Exception(_i18nService.T("CannotFindEmailClaim"));
+                throw new NullReferenceException(_i18nService.T("CannotFindEmailClaim"));
             }
             existingUser = await _userRepository.GetByEmailAsync(email);
         }
@@ -442,7 +442,7 @@ public class AccountController : Controller
         var organization = await _organizationRepository.GetByIdAsync(orgId);
         if (organization == null)
         {
-            throw new Exception(_i18nService.T("CouldNotFindOrganization", orgId));
+            throw new ArgumentNullException(_i18nService.T("CouldNotFindOrganization", orgId));
         }
 
         // Try to find OrgUser via existing User Id (accepted/confirmed user)
