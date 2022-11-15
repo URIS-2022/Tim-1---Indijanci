@@ -2,7 +2,7 @@
 
 public abstract class BaseScimModel
 {
-    public BaseScimModel()
+    protected BaseScimModel()
     { }
 
     public BaseScimModel(string schema)

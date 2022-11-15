@@ -384,7 +384,7 @@ public static class CoreHelpers
             return null;
         }
 
-        if (!text.Contains("@"))
+        if (!text.Contains('@'))
         {
             // Assume domain name or non-email address
             var idn = new IdnMapping();

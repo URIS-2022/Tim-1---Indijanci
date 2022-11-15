@@ -6,7 +6,6 @@ using Bit.Core.Repositories;
 using Bit.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Bit.Api.Controllers;
 
 [Route("organizations/{orgId}/groups")]
@@ -25,6 +24,25 @@ public class GroupsController : Controller
         _groupRepository = groupRepository;
         _groupService = groupService;
         _currentContext = currentContext;
+    }
+
+    [HttpGet("")]
+    public async Task<ListResponseModel<GroupResponseModel>> Get(string orgId)
+    {
+        var orgIdGuid = new Guid(orgId);
+        var canAccess = await _currentContext.ManageGroups(orgIdGuid) ||
+            await _currentContext.ViewAssignedCollections(orgIdGuid) ||
+            await _currentContext.ViewAllCollections(orgIdGuid) ||
+            await _currentContext.ManageUsers(orgIdGuid);
+
+        if (!canAccess)
+        {
+            throw new NotFoundException();
+        }
+
+        var groups = await _groupRepository.GetManyByOrganizationIdAsync(orgIdGuid);
+        var responses = groups.Select(g => new GroupResponseModel(g));
+        return new ListResponseModel<GroupResponseModel>(responses);
     }
 
     [HttpGet("{id}")]
@@ -49,25 +67,6 @@ public class GroupsController : Controller
         }
 
         return new GroupDetailsResponseModel(groupDetails.Item1, groupDetails.Item2);
-    }
-
-    [HttpGet("")]
-    public async Task<ListResponseModel<GroupResponseModel>> Get(string orgId)
-    {
-        var orgIdGuid = new Guid(orgId);
-        var canAccess = await _currentContext.ManageGroups(orgIdGuid) ||
-            await _currentContext.ViewAssignedCollections(orgIdGuid) ||
-            await _currentContext.ViewAllCollections(orgIdGuid) ||
-            await _currentContext.ManageUsers(orgIdGuid);
-
-        if (!canAccess)
-        {
-            throw new NotFoundException();
-        }
-
-        var groups = await _groupRepository.GetManyByOrganizationIdAsync(orgIdGuid);
-        var responses = groups.Select(g => new GroupResponseModel(g));
-        return new ListResponseModel<GroupResponseModel>(responses);
     }
 
     [HttpGet("{id}/users")]

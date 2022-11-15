@@ -44,6 +44,7 @@
         @if(Model.BillingInfo.Transactions?.Any() ?? false)
         {
             <table class="table">
+                <caption>Billing Info Transaction</caption>
                 <tbody>
                     @foreach(var transaction in Model.BillingInfo.Transactions)
                     {
