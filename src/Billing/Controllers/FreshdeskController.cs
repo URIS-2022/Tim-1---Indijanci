@@ -59,13 +59,15 @@ public class FreshdeskController : Controller
             }
 
             var updateBody = new Dictionary<string, object>();
-            var note = string.Empty;
+            StringBuilder bld = new StringBuilder();
+            //var note = string.Empty;
             var customFields = new Dictionary<string, object>();
             var user = await _userRepository.GetByEmailAsync(ticketContactEmail);
             if (user != null)
             {
                 var userLink = $"{_globalSettings.BaseServiceUri.Admin}/users/edit/{user.Id}";
-                note += $"<li>User, {user.Email}: {userLink}</li>";
+                bld.Append($"<li>User, {user.Email}: {userLink}</li>");
+                //note += $"<li>User, {user.Email}: {userLink}</li>";
                 customFields.Add("cf_user", userLink);
                 var tags = new HashSet<string>();
                 if (user.Premium)
@@ -78,7 +80,8 @@ public class FreshdeskController : Controller
                 {
                     var orgNote = $"{org.Name} ({org.Seats.GetValueOrDefault()}): " +
                         $"{_globalSettings.BaseServiceUri.Admin}/organizations/edit/{org.Id}";
-                    note += $"<li>Org, {orgNote}</li>";
+                    bld.Append($"<li>Org, {orgNote}</li>");
+                    //note += $"<li>Org, {orgNote}</li>";
                     if (!customFields.Any(kvp => kvp.Key == "cf_org"))
                     {
                         customFields.Add("cf_org", orgNote);
@@ -118,6 +121,8 @@ public class FreshdeskController : Controller
                     Content = JsonContent.Create(updateBody),
                 };
                 await CallFreshdeskApiAsync(updateRequest);
+
+                string note = bld.ToString();
 
                 var noteBody = new Dictionary<string, object>
                 {

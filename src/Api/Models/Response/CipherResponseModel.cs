@@ -114,7 +114,7 @@ public class CipherDetailsResponseModel : CipherResponseModel
         }
         else
         {
-            CollectionIds = new Guid[] { };
+            CollectionIds = System.Array.Empty<Guid>();
         }
     }
 

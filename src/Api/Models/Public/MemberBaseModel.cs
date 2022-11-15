@@ -9,7 +9,7 @@ public abstract class MemberBaseModel
 {
     public MemberBaseModel() { }
 
-    public MemberBaseModel(OrganizationUser user)
+    protected MemberBaseModel(OrganizationUser user)
     {
         if (user == null)
         {
