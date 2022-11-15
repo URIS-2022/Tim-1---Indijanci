@@ -15,7 +15,7 @@ public class RepositoryEventWriteService : IEventWriteService
 
     public async Task CreateAsync(IEvent e)
     {
-        await _eventRepository.CreateAsync(e);
+        await _eventRepository.CreateAsyncEvent(e);
     }
 
     public async Task CreateManyAsync(IEnumerable<IEvent> e)

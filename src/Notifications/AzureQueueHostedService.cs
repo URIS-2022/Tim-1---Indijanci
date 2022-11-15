@@ -48,7 +48,9 @@ public class AzureQueueHostedService : IHostedService, IDisposable
     }
 
     public void Dispose()
-    { }
+    {
+        throw new NotImplementedException();
+    }
 
     private async Task ExecuteAsync(CancellationToken cancellationToken)
     {

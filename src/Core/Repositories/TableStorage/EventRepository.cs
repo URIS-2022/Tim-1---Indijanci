@@ -61,7 +61,7 @@ public class EventRepository : IEventRepository
         return await GetManyAsync(partitionKey, $"CipherId={cipher.Id}__Date={{0}}", startDate, endDate, pageOptions);
     }
 
-    public async Task CreateAsync(IEvent e)
+    public async Task CreateAsyncEvent(IEvent e)
     {
         if (!(e is EventTableEntity entity))
         {
@@ -80,7 +80,7 @@ public class EventRepository : IEventRepository
 
         if (!e.Skip(1).Any())
         {
-            await CreateAsync(e.First());
+            await CreateAsyncEvent(e.First());
             return;
         }
 

@@ -18,7 +18,7 @@ public abstract class ReadOnlyIdentityUserStore :
     }
 
     public Task<IdentityResult> DeleteAsync(IdentityUser user,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

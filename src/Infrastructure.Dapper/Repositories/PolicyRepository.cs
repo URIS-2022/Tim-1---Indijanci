@@ -58,7 +58,7 @@ public class PolicyRepository : Repository<Policy, Guid>, IPolicyRepository
     }
 
     public async Task<ICollection<Policy>> GetManyByTypeApplicableToUserIdAsync(Guid userId, PolicyType policyType,
-        OrganizationUserStatusType minStatus)
+        OrganizationUserStatusType minStatus = OrganizationUserStatusType.Revoked)
     {
         using (var connection = new SqlConnection(ConnectionString))
         {
