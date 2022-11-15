@@ -293,7 +293,7 @@ public class ProviderService : IProviderService
 
     public async Task SaveUserAsync(ProviderUser user, Guid savingUserId)
     {
-        if (user.Id.Equals(default))
+        if (user.Id.Equals(Guid.Empty))
         {
             throw new BadRequestException("Invite the user first.");
         }
