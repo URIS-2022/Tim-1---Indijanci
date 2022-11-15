@@ -21,7 +21,7 @@ public class DeleteAuthRequestsJob : BaseJob
     {
         _logger.LogInformation(Constants.BypassFiltersEventId, "Execute job task: DeleteAuthRequestsJob: Start");
         var count = await _authRepo.DeleteExpiredAsync();
-        _logger.LogInformation(Constants.BypassFiltersEventId, $"{count} records deleted from AuthRequests.");
+        _logger.LogInformation(Constants.BypassFiltersEventId, "Records deleted from AuthRequests.");
         _logger.LogInformation(Constants.BypassFiltersEventId, "Execute job task: DeleteAuthRequestsJob: End");
     }
 }

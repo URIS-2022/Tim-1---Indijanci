@@ -42,7 +42,9 @@ public class HeartbeatHostedService : IHostedService, IDisposable
     }
 
     public void Dispose()
-    { }
+    {
+        throw new NotSupportedException();
+    }
 
     private async Task ExecuteAsync(CancellationToken cancellationToken)
     {

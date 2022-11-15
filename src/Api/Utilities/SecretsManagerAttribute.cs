@@ -15,6 +15,9 @@ public class SecretsManagerAttribute : Attribute, IResourceFilter
         }
     }
 
-    public void OnResourceExecuted(ResourceExecutedContext context) { }
+    public void OnResourceExecuted(ResourceExecutedContext context) 
+    { 
+        throw new NotSupportedException();
+    }
 }
 

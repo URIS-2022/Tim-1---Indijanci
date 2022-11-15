@@ -30,7 +30,7 @@ public abstract class ReadOnlyIdentityUserStore :
         CancellationToken cancellationToken = default);
 
     public async Task<IdentityUser> FindByNameAsync(string normalizedUserName,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return await FindByEmailAsync(normalizedUserName, cancellationToken);
     }

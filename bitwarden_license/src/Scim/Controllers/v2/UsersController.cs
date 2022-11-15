@@ -31,8 +31,8 @@ public class UsersController : Controller
         IGetUsersListQuery getUsersListQuery,
         IDeleteOrganizationUserCommand deleteOrganizationUserCommand,
         IPatchUserCommand patchUserCommand,
-        IPostUserCommand postUserCommand,
-        ILogger<UsersController> logger)
+        IPostUserCommand postUserCommand)
+        
     {
         _userService = userService;
         _organizationUserRepository = organizationUserRepository;

@@ -191,7 +191,7 @@ public class TwoFactorController : Controller
     public async Task<TwoFactorDuoResponseModel> PutOrganizationDuo(string id,
         [FromBody] UpdateTwoFactorDuoRequestModel model)
     {
-        var user = await CheckAsync(model, false);
+        
 
         var orgIdGuid = new Guid(id);
         if (!await _currentContext.ManagePolicies(orgIdGuid))

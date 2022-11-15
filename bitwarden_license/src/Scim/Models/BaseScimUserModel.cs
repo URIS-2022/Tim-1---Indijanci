@@ -4,7 +4,7 @@ namespace Bit.Scim.Models;
 
 public abstract class BaseScimUserModel : BaseScimModel
 {
-    public BaseScimUserModel(bool initSchema = false)
+    protected BaseScimUserModel(bool initSchema = false)
     {
         if (initSchema)
         {
