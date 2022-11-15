@@ -398,7 +398,6 @@ public class AccountController : Controller
 
         if (!Guid.TryParse(provider, out var orgId))
         {
-            // TODO: support non-org (server-wide) SSO in the future?
             throw new Exception(_i18nService.T("SSOProviderIsNotAnOrgId", provider));
         }
 
