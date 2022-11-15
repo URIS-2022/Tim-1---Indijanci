@@ -6,7 +6,7 @@ ALTER TABLE `OrganizationSponsorship` MODIFY COLUMN `SponsoringOrganizationId` c
 
 ALTER TABLE `Event` ADD `InstallationId` char(36) COLLATE ascii_general_ci NULL;
 
-ALTER TABLE `OrganizationSponsorship` ADD CONSTRAINT `FK_OrganizationSponsorship_Organization_SponsoringOrganizationId` FOREIGN KEY (`SponsoringOrganizationId`) REFERENCES `Organization` (`Id`) ON DELETE RESTRICT;
+ALTER TABLE `OrganizationSponsorship` ADD CONSTRAINT `FK_OrganizationSponsorship_Organization_SponsoringOrganizationId` FOREIGN KEY (`SponsoringOrganizationId`) REFERENCES `Organization` (`Id`) ON DELETE CASCADE;
 
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
 VALUES ('20220420170738_AddInstallationIdToEvents', '5.0.12');

@@ -24,16 +24,16 @@ public class SendSponsorshipOfferCommand : ISendSponsorshipOfferCommand
         _tokenFactory = tokenFactory;
     }
 
-    public async Task BulkSendSponsorshipOfferAsync(string sponsoringOrgName, IEnumerable<OrganizationSponsorship> sponsorships)
+    public async Task BulkSendSponsorshipOfferAsync(string sponsoringOrgName, IEnumerable<OrganizationSponsorship> invites)
     {
-        var invites = new List<(string, bool, string)>();
-        foreach (var sponsorship in sponsorships)
+        var invites1 = new List<(string, bool, string)>();
+        foreach (var invite in invites)
         {
             var user = await _userRepository.GetByEmailAsync(sponsorship.OfferedToEmail);
             invites.Add((sponsorship.OfferedToEmail, user != null, _tokenFactory.Protect(new OrganizationSponsorshipOfferTokenable(sponsorship))));
         }
 
-        await _mailService.BulkSendFamiliesForEnterpriseOfferEmailAsync(sponsoringOrgName, invites);
+        await _mailService.BulkSendFamiliesForEnterpriseOfferEmailAsync(sponsoringOrgName, invites1);
     }
 
     public async Task SendSponsorshipOfferAsync(OrganizationSponsorship sponsorship, string sponsoringOrgName)

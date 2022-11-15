@@ -104,7 +104,7 @@ begin
     end
     else 
     begin
-        /*Write operation parameters*/
+       --Write operation parameters
         raiserror('-----------------------',0,0)
         set @msg = 'set operation = ' + @operation;
         raiserror(@msg,0,0)
@@ -115,7 +115,7 @@ begin
         raiserror('-----------------------',0,0)
     end
     
-    /* Prepare Log Table */
+    --Prepare Log Table
         if object_id('AzureSQLMaintenanceLog') is null 
         begin
             create table AzureSQLMaintenanceLog (id bigint primary key identity(1,1), OperationTime datetime2, command varchar(4000),ExtraInfo varchar(4000), StartTime datetime2, EndTime datetime2, StatusMessage varchar(1000));

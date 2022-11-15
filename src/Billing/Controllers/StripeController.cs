@@ -411,10 +411,8 @@ public class StripeController : Controller
                         }
                     }
                     // user
-                    else if (ids.Item2.HasValue)
+                    if ((ids.Item2.HasValue) && (subscription.Items.Any(i => i.Plan.Id == PremiumPlanId)))
                     {
-                        if (subscription.Items.Any(i => i.Plan.Id == PremiumPlanId))
-                        {
                             await _userService.EnablePremiumAsync(ids.Item2.Value, subscription.CurrentPeriodEnd);
 
                             var user = await _userRepository.GetByIdAsync(ids.Item2.Value);
@@ -424,7 +422,7 @@ public class StripeController : Controller
                                     PlanName = PremiumPlanId,
                                     Storage = user?.MaxStorageGb,
                                 });
-                        }
+                        
                     }
                 }
             }

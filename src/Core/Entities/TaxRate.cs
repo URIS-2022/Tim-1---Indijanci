@@ -18,6 +18,5 @@ public class TaxRate : ITableObject<string>
     public void SetNewId()
     {
         // Id is created by Stripe, should exist before this gets called
-        return;
     }
 }

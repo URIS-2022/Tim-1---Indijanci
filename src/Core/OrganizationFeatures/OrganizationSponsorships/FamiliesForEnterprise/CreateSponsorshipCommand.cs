@@ -71,7 +71,7 @@ public class CreateSponsorshipCommand : ICreateSponsorshipCommand
         }
         catch
         {
-            if (sponsorship.Id != default)
+            if (sponsorship.Id != Guid.NewGuid())
             {
                 await _organizationSponsorshipRepository.DeleteAsync(sponsorship);
             }
