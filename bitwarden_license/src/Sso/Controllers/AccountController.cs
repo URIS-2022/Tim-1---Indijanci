@@ -28,7 +28,7 @@ namespace Bit.Sso.Controllers;
 public class AccountController : Controller
 {
     private readonly IAuthenticationSchemeProvider _schemeProvider;
-    private readonly IClientStore _clientStore;
+    private IClientStore _clientStore;
 
     private readonly IIdentityServerInteractionService _interaction;
     private readonly ILogger<AccountController> _logger;

@@ -47,7 +47,6 @@ public class Startup
 
         // Identity
         services.AddCustomIdentityServices(globalSettings);
-        //services.AddPasswordlessIdentityServices<ReadOnlyDatabaseIdentityUserStore>(globalSettings);
 
         // Services
         services.AddBaseServices(globalSettings);

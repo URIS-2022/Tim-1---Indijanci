@@ -420,9 +420,6 @@ public class HandlebarsMailService : IMailService
         await _mailDeliveryService.SendEmailAsync(message);
     }
 
-    private Task EnqueueMailAsync(IMailQueueMessage queueMessage) =>
-        _mailEnqueuingService.EnqueueAsync(queueMessage, SendEnqueuedMailMessageAsync);
-
     private Task EnqueueMailAsync(IEnumerable<IMailQueueMessage> queueMessages) =>
         _mailEnqueuingService.EnqueueManyAsync(queueMessages, SendEnqueuedMailMessageAsync);
 

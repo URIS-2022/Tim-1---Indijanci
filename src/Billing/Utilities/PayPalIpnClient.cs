@@ -54,7 +54,7 @@ public class PayPalIpnClient
 
     public class IpnTransaction
     {
-        private string[] _dateFormats = new string[]
+        private readonly string[] _dateFormats = new string[]
         {
             "HH:mm:ss dd MMM yyyy PDT", "HH:mm:ss dd MMM yyyy PST", "HH:mm:ss dd MMM, yyyy PST",
             "HH:mm:ss dd MMM, yyyy PDT","HH:mm:ss MMM dd, yyyy PST", "HH:mm:ss MMM dd, yyyy PDT"
