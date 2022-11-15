@@ -15,6 +15,7 @@ public class TwoFactorYubiKeyResponseModel : ResponseModel
         }
 
         var provider = user.GetTwoFactorProvider(TwoFactorProviderType.YubiKey);
+        Enabled = false;
         if (provider?.MetaData != null && provider.MetaData.Count > 0)
         {
             Enabled = provider.Enabled;
@@ -44,10 +45,7 @@ public class TwoFactorYubiKeyResponseModel : ResponseModel
                 Nfc = (bool)provider.MetaData["Nfc"];
             }
         }
-        else
-        {
-            Enabled = false;
-        }
+
     }
 
     public bool Enabled { get; set; }
