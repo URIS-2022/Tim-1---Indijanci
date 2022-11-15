@@ -122,7 +122,12 @@ public class ProviderService : IProviderService
             throw new ArgumentException("Cannot create provider this way.");
         }
 
+<<<<<<< Updated upstream
+        UpdateAsync(provider);
+        
+=======
         return provider.UpdateAsync(updateBilling);
+>>>>>>> Stashed changes
     }
 
     private async Task UpdateAsync(Provider provider, bool updateBilling = false)

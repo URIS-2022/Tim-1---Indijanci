@@ -122,7 +122,8 @@ public class ProviderService : IProviderService
             throw new ArgumentException("Cannot create provider this way.");
         }
 
-        return provider.UpdateAsync(updateBilling);
+        UpdateAsync(provider);
+        
     }
 
     private async Task UpdateAsync(Provider provider, bool updateBilling = false)
