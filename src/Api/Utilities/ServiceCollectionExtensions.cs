@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
                 License = new OpenApiLicense
                 {
                     Name = "GNU Affero General Public License v3.0",
-                    Url = new Uri("https://github.com/bitwarden/server/blob/master/LICENSE.txt")
+                    Url = new Uri(globalSettings.LicenseUri)
                 }
             });
             config.SwaggerDoc("internal", new OpenApiInfo { Title = "Bitwarden Internal API", Version = "latest" });

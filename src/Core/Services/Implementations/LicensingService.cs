@@ -108,7 +108,6 @@ public class LicensingService : ILicensingService
             if (!license.VerifySignature(_certificate))
             {
                 await DisableOrganizationAsync(org, license, "Invalid signature.");
-                continue;
             }
         }
     }
