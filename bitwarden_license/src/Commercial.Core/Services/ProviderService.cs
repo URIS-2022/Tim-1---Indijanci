@@ -12,13 +12,12 @@ using Bit.Core.Services;
 using Bit.Core.Settings;
 using Bit.Core.Utilities;
 using Microsoft.AspNetCore.DataProtection;
-using System.Threading.Tasks;
 
 namespace Bit.Commercial.Core.Services;
 
 public class ProviderService : IProviderService
 {
-    protected static readonly PlanType[] ProviderDisllowedOrganizationTypes = new[] { PlanType.Free, PlanType.FamiliesAnnually, PlanType.FamiliesAnnually2019 };
+    public static readonly PlanType[] ProviderDisllowedOrganizationTypes = new[] { PlanType.Free, PlanType.FamiliesAnnually, PlanType.FamiliesAnnually2019 };
 
     private readonly IDataProtector _dataProtector;
     private readonly IMailService _mailService;
@@ -115,18 +114,13 @@ public class ProviderService : IProviderService
         return provider;
     }
 
-    public Task UpdateAsync(Provider provider, bool updateBilling = false)
+    public async Task UpdateAsync(Provider provider, bool updateBilling = false)
     {
         if (provider.Id == Guid.Empty)
         {
             throw new ArgumentException("Cannot create provider this way.");
         }
 
-        return provider.UpdateAsync(updateBilling);
-    }
-
-    private async Task UpdateAsync(Provider provider, bool updateBilling = false)
-    {
         await _providerRepository.ReplaceAsync(provider);
     }
 
@@ -138,6 +132,7 @@ public class ProviderService : IProviderService
         }
 
         var emails = invite?.UserIdentifiers;
+        var invitingUser = await _providerUserRepository.GetByProviderUserAsync(invite.ProviderId, invite.InvitingUserId);
 
         var provider = await _providerRepository.GetByIdAsync(invite.ProviderId);
         if (provider == null || emails == null || !emails.Any())
@@ -298,8 +293,7 @@ public class ProviderService : IProviderService
 
     public async Task SaveUserAsync(ProviderUser user, Guid savingUserId)
     {
-        var newVar = Guid.Empty;
-        if (user.Id.Equals(newVar))
+        if (user.Id.Equals(default))
         {
             throw new BadRequestException("Invite the user first.");
         }
@@ -442,7 +436,7 @@ public class ProviderService : IProviderService
             throw new BadRequestException("Invalid organization.");
         }
 
-        if (!await _organizationService.HasConfirmedOwnersExceptAsync(providerOrganization.OrganizationId, Array.Empty<Guid>(), includeProvider: false))
+        if (!await _organizationService.HasConfirmedOwnersExceptAsync(providerOrganization.OrganizationId, new Guid[] { }, includeProvider: false))
         {
             throw new BadRequestException("Organization needs to have at least one confirmed owner.");
         }
@@ -504,7 +498,7 @@ public class ProviderService : IProviderService
         return confirmedOwnersIds.Except(providerUserIds).Any();
     }
 
-    private static void ThrowOnInvalidPlanType(PlanType requestedType)
+    private void ThrowOnInvalidPlanType(PlanType requestedType)
     {
         if (ProviderDisllowedOrganizationTypes.Contains(requestedType))
         {
