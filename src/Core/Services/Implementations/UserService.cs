@@ -591,8 +591,9 @@ public class UserService : UserManager<User>, IUserService, IDisposable
         return IdentityResult.Success;
     }
 
-    public override Task<IdentityResult> ChangePasswordAsync(User user, string masterPassword, string newMasterPassword)
+    public override Task<IdentityResult> ChangePasswordAsync(User user, string masterPassword, string newPassword)
     {
+
         throw new NotImplementedException();
     }
 
