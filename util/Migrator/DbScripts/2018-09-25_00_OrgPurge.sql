@@ -75,7 +75,7 @@ begin
     declare @OperationTime datetime2 = sysdatetime();
     declare @KeepXOperationInLog int =3;
 
-    /* make sure parameters selected correctly */
+    --make sure parameters selected correctly
     set @operation = lower(@operation)
     set @mode = lower(@mode)
     

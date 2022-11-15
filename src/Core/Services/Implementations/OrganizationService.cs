@@ -1142,7 +1142,7 @@ public class OrganizationService : IOrganizationService
         {
             var occupiedSeats = await GetOccupiedSeatCount(organization);
             var availableSeats = organization.Seats.Value - occupiedSeats;
-            newSeatsRequired = invites.Sum(i => i.invite.Emails.Count()) - existingEmails.Count() - availableSeats;
+            newSeatsRequired = invites.Sum(i => i.invite.Emails.Count()) - existingEmails.Count - availableSeats;
         }
 
         if (newSeatsRequired > 0)
