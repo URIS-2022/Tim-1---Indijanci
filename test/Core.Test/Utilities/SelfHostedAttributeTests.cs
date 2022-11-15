@@ -44,11 +44,8 @@ public class SelfHostedAttributeTests
         // Arrange
         var sha = new SelfHostedAttribute { SelfHostedOnly = true };
 
-        // Act
-        sha.OnActionExecuting(GetContext(selfHosted: true));
-
-        // Assert
-        // The Assert here is just NOT throwing an exception
+        // Act & Assert
+        Assert.Throws<BadRequestException>(() => sha.OnActionExecuting(GetContext(selfHosted: true)));
     }
 
     [Fact]

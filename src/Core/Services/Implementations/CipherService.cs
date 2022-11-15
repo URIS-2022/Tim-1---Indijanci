@@ -256,7 +256,7 @@ public class CipherService : ICipherService
     }
 
     public async Task CreateAttachmentShareAsync(Cipher cipher, Stream stream, long requestLength,
-        string attachmentId, Guid organizationId)
+        string attachmentId, Guid organizationShareId)
     {
         try
         {
@@ -275,7 +275,7 @@ public class CipherService : ICipherService
                 throw new BadRequestException("Cipher belongs to an organization already.");
             }
 
-            var org = await _organizationRepository.GetByIdAsync(organizationId);
+            var org = await _organizationRepository.GetByIdAsync(organizationShareId);
             if (org == null || !org.MaxStorageGb.HasValue)
             {
                 throw new BadRequestException("This organization cannot use attachments.");
@@ -293,7 +293,7 @@ public class CipherService : ICipherService
                 throw new BadRequestException($"Cipher does not own specified attachment");
             }
 
-            await _attachmentStorageService.UploadShareAttachmentAsync(stream, cipher.Id, organizationId,
+            await _attachmentStorageService.UploadShareAttachmentAsync(stream, cipher.Id, organizationShareId,
                 attachments[attachmentId]);
 
             // Previous call may alter metadata

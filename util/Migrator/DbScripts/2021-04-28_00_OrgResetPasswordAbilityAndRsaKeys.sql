@@ -1,5 +1,6 @@
 -- Table: Organization (UseResetPassword)
-IF COL_LENGTH('[dbo].[Organization]', 'UseResetPassword') IS NULL
+DECLARE @organization as VARCHAR(20) ='[dbo].[Organization]'
+IF COL_LENGTH(@organization, 'UseResetPassword') IS NULL
 BEGIN
     ALTER TABLE
         [dbo].[Organization]
@@ -23,7 +24,7 @@ ALTER COLUMN
 GO
 
 -- Table: Organization (PublicKey)
-IF COL_LENGTH('[dbo].[Organization]', 'PublicKey') IS NULL
+IF COL_LENGTH(@organization, 'PublicKey') IS NULL
 BEGIN
     ALTER TABLE
         [dbo].[Organization]
@@ -33,7 +34,7 @@ END
 GO
 
 -- Table: Organization (PrivateKey)
-IF COL_LENGTH('[dbo].[Organization]', 'PrivateKey') IS NULL
+IF COL_LENGTH(@organization, 'PrivateKey') IS NULL
 BEGIN
     ALTER TABLE
         [dbo].[Organization]

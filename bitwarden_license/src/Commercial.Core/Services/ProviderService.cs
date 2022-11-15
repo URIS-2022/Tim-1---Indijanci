@@ -12,6 +12,7 @@ using Bit.Core.Services;
 using Bit.Core.Settings;
 using Bit.Core.Utilities;
 using Microsoft.AspNetCore.DataProtection;
+using System.Threading.Tasks;
 
 namespace Bit.Commercial.Core.Services;
 
@@ -114,13 +115,19 @@ public class ProviderService : IProviderService
         return provider;
     }
 
-    public async Task UpdateAsync(Provider provider, bool updateBilling = false)
+    public Task UpdateAsync(Provider provider, bool updateBilling = false)
     {
         if (provider.Id == Guid.Empty)
         {
             throw new ArgumentException("Cannot create provider this way.");
         }
 
+        UpdateAsync(provider);
+        
+    }
+
+    private async Task UpdateAsync(Provider provider, bool updateBilling = false)
+    {
         await _providerRepository.ReplaceAsync(provider);
     }
 

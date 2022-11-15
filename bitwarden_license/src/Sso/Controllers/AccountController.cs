@@ -1,4 +1,5 @@
-﻿using System.Security.Authentication;
+﻿using System;
+using System.Security.Authentication;
 using System.Security.Claims;
 using Bit.Core;
 using Bit.Core.Entities;
@@ -348,7 +349,7 @@ public class AccountController : Controller
             var acrClaim = externalUser.FindFirst(JwtClaimTypes.AuthenticationContextClassReference);
             if (acrClaim?.Value != ssoConfigData.ExpectedReturnAcrValue)
             {
-                throw new Exception(_i18nService.T("AcrMissingOrInvalid"));
+                throw new SystemException(_i18nService.T("AcrMissingOrInvalid"));
             }
         }
 
