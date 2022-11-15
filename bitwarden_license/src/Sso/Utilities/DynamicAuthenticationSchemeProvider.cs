@@ -434,7 +434,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
         };
     }
 
-    private SigningBehavior GetSigningBehavior(Saml2SigningBehavior behavior)
+    private static SigningBehavior GetSigningBehavior(Saml2SigningBehavior behavior)
     {
         return behavior switch
         {

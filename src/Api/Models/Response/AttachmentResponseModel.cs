@@ -2,8 +2,11 @@
 using Bit.Core.Entities;
 using Bit.Core.Models.Api;
 using Bit.Core.Models.Data;
+using Bit.Core.OrganizationFeatures.OrganizationSponsorships.FamiliesForEnterprise.Cloud;
 using Bit.Core.Settings;
 using Bit.Core.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bit.Api.Models.Response;
 
@@ -41,6 +44,7 @@ public class AttachmentResponseModel : ResponseModel
 
     public static IEnumerable<AttachmentResponseModel> FromCipher(Cipher cipher, IGlobalSettings globalSettings)
     {
+        
         var attachments = cipher.GetAttachments();
         if (attachments == null)
         {

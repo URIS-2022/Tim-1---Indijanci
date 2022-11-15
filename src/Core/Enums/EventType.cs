@@ -1,6 +1,6 @@
 ﻿namespace Bit.Core.Enums;
 
-public enum EventType : int
+public enum EventType
 {
     User_LoggedIn = 1000,
     User_ChangedPassword = 1001,
