@@ -58,7 +58,7 @@ public class MetadataController : Controller
         var metadataResult = CommandFactory
             .GetCommand(CommandFactory.MetadataCommand)
             .Run(requestdata, options);
-        //Response.Headers.Add("Content-Disposition", $"filename= bitwarden-saml2-meta-{scheme}.xml");
+        
         return new ContentResult
         {
             Content = metadataResult.Content,

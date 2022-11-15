@@ -98,12 +98,11 @@ public static class Helpers
         }
 
         var lines = File.ReadAllLines($"/bitwarden/env/{envFile}.override.env");
-        foreach (var line in lines)
+        foreach (var line in lines.Where(line=> line.StartsWith($"{key}=")))
         {
-            if (line.StartsWith($"{key}="))
-            {
+             
                 return line.Split(new char[] { '=' }, 2)[1].Trim('"').Replace("\\\"", "\"");
-            }
+            
         }
 
         return null;

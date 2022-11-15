@@ -217,7 +217,7 @@ public class CollectionCipherRepository : BaseEntityFrameworkRepository, ICollec
                                        (ou.AccessAll || !cu.ReadOnly || g.AccessAll || !cg.ReadOnly))
                                        select new { c, o, ou, cu, gu, g, cg };
             var count = await availibleCollections.CountAsync();
-            if (await availibleCollections.CountAsync() < 1)
+            if (await availibleCollections.AnyAsync() == false)
             {
                 return;
             }

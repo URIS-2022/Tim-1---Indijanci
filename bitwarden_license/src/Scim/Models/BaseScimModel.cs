@@ -5,7 +5,7 @@ public abstract class BaseScimModel
     protected BaseScimModel()
     { }
 
-    public BaseScimModel(string schema)
+    protected BaseScimModel(string schema)
     {
         Schemas = new List<string> { schema };
     }

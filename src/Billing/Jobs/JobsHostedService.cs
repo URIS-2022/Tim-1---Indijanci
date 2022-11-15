@@ -24,12 +24,6 @@ public class JobsHostedService : BaseJobsHostedService
             timeZone = TimeZoneInfo.Local;
         }
 
-        var everyDayAtNinePmTrigger = TriggerBuilder.Create()
-            .WithIdentity("EveryDayAtNinePmTrigger")
-            .StartNow()
-            .WithCronSchedule("0 0 21 * * ?", x => x.InTimeZone(timeZone))
-            .Build();
-
         Jobs = new List<Tuple<Type, ITrigger>>();
 
         // Add jobs here

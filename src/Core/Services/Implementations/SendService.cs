@@ -240,7 +240,6 @@ public class SendService : ISendService
             return (null, passwordRequired, passwordInvalid);
         }
 
-        // TODO: maybe move this to a simple ++ sproc?
         if (send.Type != SendType.File)
         {
             // File sends are incremented during file download

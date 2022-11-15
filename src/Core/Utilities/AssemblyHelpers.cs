@@ -32,7 +32,7 @@ public static class AssemblyHelpers
         {
             try
             {
-                _gitHash = _assemblyMetadataAttributes.Where(i => i.Key == GIT_HASH_ASSEMBLY_KEY).First().Value;
+                _gitHash = _assemblyMetadataAttributes.First(i => i.Key == GIT_HASH_ASSEMBLY_KEY).Value;
             }
             catch (Exception)
             { }

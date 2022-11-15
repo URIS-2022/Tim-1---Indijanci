@@ -12,8 +12,8 @@ public class DomainName
         "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
         "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
 
-    private string _subDomain = string.Empty;
-    private string _domain = string.Empty;
+    private readonly string _subDomain = string.Empty;
+    private readonly string _domain = string.Empty;
     private string _tld = string.Empty;
     private TLDRule _tldRule = null;
 

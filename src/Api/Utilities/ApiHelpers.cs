@@ -50,10 +50,10 @@ public static class ApiHelpers
         var eventGridEvents = EventGridEvent.ParseMany(requestData);
         foreach (var eventGridEvent in eventGridEvents)
         {
-            if (eventGridEvent.TryGetSystemEventData(out object systemEvent))
+            if (eventGridEvent.TryGetSystemEventData(out object systemEvent) && (systemEvent is SubscriptionValidationEventData eventData))
             {
-                if (systemEvent is SubscriptionValidationEventData eventData)
-                {
+                
+                
                     // Might want to enable additional validation: subject, topic etc.
                     var responseData = new SubscriptionValidationResponse()
                     {
@@ -61,7 +61,7 @@ public static class ApiHelpers
                     };
 
                     return new OkObjectResult(responseData);
-                }
+                
             }
 
             if (eventTypeHandlers.ContainsKey(eventGridEvent.EventType))

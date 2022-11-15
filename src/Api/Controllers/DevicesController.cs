@@ -56,6 +56,25 @@ public class DevicesController : Controller
         return response;
     }
 
+    [AllowAnonymous]
+    [HttpGet("knowndevice/{email}/{identifier}")]
+    public async Task<bool> GetByIdentifier(string email, string identifier)
+    {
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(identifier))
+        {
+            throw new BadRequestException("Please provide an email and device identifier");
+        }
+
+        var user = await _userRepository.GetByEmailAsync(email);
+        if (user == null)
+        {
+            return false;
+        }
+
+        var device = await _deviceRepository.GetByIdentifierAsync(identifier, user.Id);
+        return device != null;
+    }
+
     [HttpGet("")]
     public async Task<ListResponseModel<DeviceResponseModel>> Get()
     {
@@ -128,24 +147,5 @@ public class DevicesController : Controller
         }
 
         await _deviceService.DeleteAsync(device);
-    }
-
-    [AllowAnonymous]
-    [HttpGet("knowndevice/{email}/{identifier}")]
-    public async Task<bool> GetByIdentifier(string email, string identifier)
-    {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(identifier))
-        {
-            throw new BadRequestException("Please provide an email and device identifier");
-        }
-
-        var user = await _userRepository.GetByEmailAsync(email);
-        if (user == null)
-        {
-            return false;
-        }
-
-        var device = await _deviceRepository.GetByIdentifierAsync(identifier, user.Id);
-        return device != null;
     }
 }
