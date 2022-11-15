@@ -373,7 +373,9 @@ public class StripePaymentService : IPaymentService
             {
                 customer = await _stripeAdapter.CustomerGetAsync(user.GatewayCustomerId);
             }
-            catch { }
+            catch (Exception e) {
+                _logger.LogError(e.Message);
+            }
         }
 
         if (customer == null && !string.IsNullOrWhiteSpace(paymentToken))

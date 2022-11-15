@@ -91,7 +91,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             return;
         }
 
-        if (message.Contains(".") || message.Contains(':'))
+        if (message.Contains('.') || message.Contains(':'))
         {
             // IP address messages
             var request = new HttpRequestMessage();
