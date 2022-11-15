@@ -1702,10 +1702,10 @@ public class OrganizationService : IOrganizationService
     }
 
     public async Task<List<Tuple<OrganizationUser, string>>> DeleteUsersAsync(Guid organizationId,
-        IEnumerable<Guid> organizationUsersId,
+        IEnumerable<Guid> organizationUsersIds,
         Guid? deletingUserId)
     {
-        var orgUsers = await _organizationUserRepository.GetManyAsync(organizationUsersId);
+        var orgUsers = await _organizationUserRepository.GetManyAsync(organizationUsersIds);
         var filteredUsers = orgUsers.Where(u => u.OrganizationId == organizationId)
             .ToList();
 
@@ -1714,7 +1714,7 @@ public class OrganizationService : IOrganizationService
             throw new BadRequestException("Users invalid.");
         }
 
-        if (!await HasConfirmedOwnersExceptAsync(organizationId, organizationUsersId))
+        if (!await HasConfirmedOwnersExceptAsync(organizationId, organizationUsersIds))
         {
             throw new BadRequestException("Organization must have at least one confirmed owner.");
         }

@@ -82,7 +82,7 @@ public class EventRepository : Repository<Event, Guid>, IEventRepository
             }, startDate, endDate, pageOptions);
     }
 
-    public async Task CreateAsync(IEvent e)
+    public async Task CreateAsyncEvent(IEvent e)
     {
         if (!(e is Event ev))
         {
@@ -101,7 +101,7 @@ public class EventRepository : Repository<Event, Guid>, IEventRepository
 
         if (!entities.Skip(1).Any())
         {
-            await CreateAsync(entities.First());
+            await CreateAsyncEvent(entities.First());
             return;
         }
 
