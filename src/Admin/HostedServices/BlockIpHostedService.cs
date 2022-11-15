@@ -13,7 +13,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     private CancellationTokenSource _cts;
     private HttpClient _httpClient = new HttpClient();
 
-    private string URL = "https://api.cloudflare.com/";
+    private readonly string URL = "https://api.cloudflare.com/";
 
     public BlockIpHostedService(
         ILogger<BlockIpHostedService> logger,
@@ -44,7 +44,9 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     }
 
     public virtual void Dispose()
-    {}
+    {
+        GC.SuppressFinalize(this);
+    }
 
     protected abstract Task ExecuteAsync(CancellationToken cancellationToken);
 

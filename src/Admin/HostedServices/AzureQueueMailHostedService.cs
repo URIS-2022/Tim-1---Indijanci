@@ -46,6 +46,7 @@ public class AzureQueueMailHostedService : IHostedService
         cancellationToken.ThrowIfCancellationRequested();
     }
 
+    [Obsolete]
     private async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _mailQueueClient = new QueueClient(_globalSettings.Mail.ConnectionString, "mail");
@@ -56,7 +57,7 @@ public class AzureQueueMailHostedService : IHostedService
             mailMessages = await RetrieveMessagesAsync();
             if (!mailMessages.Any())
             {
-                await Task.Delay(TimeSpan.FromSeconds(15));
+                await Task.Delay(TimeSpan.FromSeconds(15), cancellationToken);
             }
 
             foreach (var message in mailMessages)
@@ -85,7 +86,7 @@ public class AzureQueueMailHostedService : IHostedService
                     // TODO: retries?
                 }
 
-                await _mailQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt);
+                await _mailQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt, cancellationToken);
 
                 if (cancellationToken.IsCancellationRequested)
                 {

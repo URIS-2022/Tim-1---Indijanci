@@ -303,7 +303,7 @@ public class ToolsController : Controller
         });
     }
 
-    private void CheckFile(IFormFile file)
+    private static void CheckFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
