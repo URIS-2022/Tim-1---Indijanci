@@ -77,7 +77,7 @@ public class LoginController : Controller
         });
     }
 
-    private string GetMessage(int? messageCode)
+    private static string GetMessage(int? messageCode)
     {
         return messageCode switch
         {

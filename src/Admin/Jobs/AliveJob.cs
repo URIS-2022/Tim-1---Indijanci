@@ -8,7 +8,7 @@ namespace Bit.Admin.Jobs;
 public class AliveJob : BaseJob
 {
     private readonly GlobalSettings _globalSettings;
-    private HttpClient _httpClient = new HttpClient();
+    private readonly HttpClient _httpClient = new HttpClient();
 
     public AliveJob(
         GlobalSettings globalSettings,
@@ -22,7 +22,6 @@ public class AliveJob : BaseJob
     {
         _logger.LogInformation(Constants.BypassFiltersEventId, "Execute job task: Keep alive");
         var response = await _httpClient.GetAsync(_globalSettings.BaseServiceUri.Admin);
-        _logger.LogInformation(Constants.BypassFiltersEventId, "Finished job task: Keep alive, " +
-            response.StatusCode);
+        _logger.LogInformation(Constants.BypassFiltersEventId, "Finished job task: Keep alive", response.StatusCode);
     }
 }

@@ -116,7 +116,7 @@ public class ProviderService : IProviderService
 
     public async Task UpdateAsync(Provider provider, bool updateBilling = false)
     {
-        if (provider.Id == default)
+        if (provider.Id == Guid.Empty)
         {
             throw new ArgumentException("Cannot create provider this way.");
         }
@@ -132,7 +132,6 @@ public class ProviderService : IProviderService
         }
 
         var emails = invite?.UserIdentifiers;
-        var invitingUser = await _providerUserRepository.GetByProviderUserAsync(invite.ProviderId, invite.InvitingUserId);
 
         var provider = await _providerRepository.GetByIdAsync(invite.ProviderId);
         if (provider == null || emails == null || !emails.Any())
@@ -293,7 +292,8 @@ public class ProviderService : IProviderService
 
     public async Task SaveUserAsync(ProviderUser user, Guid savingUserId)
     {
-        if (user.Id.Equals(default))
+        var newVar = Guid.Empty;
+        if (user.Id.Equals(newVar))
         {
             throw new BadRequestException("Invite the user first.");
         }
@@ -464,7 +464,7 @@ public class ProviderService : IProviderService
 
     public async Task LogProviderAccessToOrganizationAsync(Guid organizationId)
     {
-        if (organizationId == default)
+        if (organizationId == Guid.Empty)
         {
             return;
         }
@@ -498,7 +498,7 @@ public class ProviderService : IProviderService
         return confirmedOwnersIds.Except(providerUserIds).Any();
     }
 
-    private void ThrowOnInvalidPlanType(PlanType requestedType)
+    private static void ThrowOnInvalidPlanType(PlanType requestedType)
     {
         if (ProviderDisllowedOrganizationTypes.Contains(requestedType))
         {

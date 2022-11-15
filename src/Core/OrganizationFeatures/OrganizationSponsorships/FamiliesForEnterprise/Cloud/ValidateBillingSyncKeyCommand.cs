@@ -30,9 +30,12 @@ public class ValidateBillingSyncKeyCommand : IValidateBillingSyncKeyCommand
         }
 
         var orgApiKey = (await _apiKeyRepository.GetManyByOrganizationIdTypeAsync(organization.Id, Enums.OrganizationApiKeyType.BillingSync)).FirstOrDefault();
-        if (string.Equals(orgApiKey.ApiKey, billingSyncKey))
+        if(orgApiKey != null)
         {
-            return true;
+            if (string.Equals(orgApiKey.ApiKey, billingSyncKey))
+            {
+                return true;
+            }
         }
         return false;
     }

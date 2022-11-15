@@ -15,7 +15,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
 
     private readonly string URL = "https://api.cloudflare.com/";
 
-    public BlockIpHostedService(
+    protected BlockIpHostedService(
         ILogger<BlockIpHostedService> logger,
         IOptions<AdminSettings> adminSettings,
         GlobalSettings globalSettings)
@@ -44,7 +44,9 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
     }
 
     public virtual void Dispose()
-    {}
+    {
+        GC.SuppressFinalize(this);
+    }
 
     protected abstract Task ExecuteAsync(CancellationToken cancellationToken);
 
@@ -81,7 +83,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             return;
         }
 
-        // TODO: Send `accessRuleResponse.Result?.Id` message to unblock queue
+        
     }
 
     protected async Task UnblockIpAsync(string message, CancellationToken cancellationToken)
@@ -91,7 +93,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             return;
         }
 
-        if (message.Contains(".") || message.Contains(":"))
+        if (message.Contains('.') || message.Contains(':'))
         {
             // IP address messages
             var request = new HttpRequestMessage();

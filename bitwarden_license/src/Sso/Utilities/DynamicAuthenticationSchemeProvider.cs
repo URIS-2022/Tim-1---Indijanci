@@ -66,7 +66,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
             IExtendedOptionsMonitorCache<Saml2Options>;
         if (_extendedSaml2OptionsMonitorCache == null)
         {
-            throw new ArgumentNullException("_extendedSaml2OptionsMonitorCache could not be resolved.");
+            throw new ArgumentNullException(nameof(_extendedSaml2OptionsMonitorCache), "_extendedSaml2OptionsMonitorCache could not be resolved.");
         }
 
         _ssoConfigRepository = ssoConfigRepository;
@@ -434,7 +434,7 @@ public class DynamicAuthenticationSchemeProvider : AuthenticationSchemeProvider
         };
     }
 
-    private SigningBehavior GetSigningBehavior(Saml2SigningBehavior behavior)
+    private static SigningBehavior GetSigningBehavior(Saml2SigningBehavior behavior)
     {
         return behavior switch
         {

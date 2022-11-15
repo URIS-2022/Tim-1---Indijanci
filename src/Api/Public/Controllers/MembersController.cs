@@ -114,13 +114,6 @@ public class MembersController : Controller
     public async Task<IActionResult> Post([FromBody] MemberCreateRequestModel model)
     {
         var associations = model.Collections?.Select(c => c.ToSelectionReadOnly());
-        var invite = new OrganizationUserInvite
-        {
-            Emails = new List<string> { model.Email },
-            Type = model.Type.Value,
-            AccessAll = model.AccessAll.Value,
-            Collections = associations
-        };
         var user = await _organizationService.InviteUserAsync(_currentContext.OrganizationId.Value, null,
             model.Email, model.Type.Value, model.AccessAll.Value, model.ExternalId, associations);
         var response = new MemberResponseModel(user, associations);

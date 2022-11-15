@@ -52,12 +52,7 @@ public class SendsController : Controller
     [HttpPost("access/{id}")]
     public async Task<IActionResult> Access(string id, [FromBody] SendAccessRequestModel model)
     {
-        // Uncomment whenever we want to require the `send-id` header
-        //if (!_currentContext.HttpContext.Request.Headers.ContainsKey("Send-Id") ||
-        //    _currentContext.HttpContext.Request.Headers["Send-Id"] != id)
-        //{
-        //    throw new BadRequestException("Invalid Send-Id header.");
-        //}
+        
 
         var guid = new Guid(CoreHelpers.Base64UrlDecode(id));
         var (send, passwordRequired, passwordInvalid) =
@@ -109,10 +104,6 @@ public class SendsController : Controller
         {
             await Task.Delay(2000);
             throw new BadRequestException("Invalid password.");
-        }
-        if (send == null)
-        {
-            throw new NotFoundException();
         }
 
         return new ObjectResult(new SendFileDownloadDataResponseModel()

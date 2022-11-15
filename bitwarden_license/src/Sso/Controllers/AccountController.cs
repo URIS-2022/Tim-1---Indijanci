@@ -415,7 +415,7 @@ public class AccountController : Controller
             var split = userIdentifier.Split(",");
             if (split.Length < 2)
             {
-                throw new Exception(_i18nService.T("InvalidUserIdentifier"));
+                 throw new Exception(_i18nService.T("InvalidUserIdentifier"));
             }
             var userId = split[0];
             var token = split[1];
@@ -572,7 +572,7 @@ public class AccountController : Controller
 
     private static string GetEmailAddress(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
-        var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains("@"));
+        var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value) && c.Value.Contains('@'));
 
         var email = filteredClaims.GetFirstMatch(additionalClaimTypes.ToArray()) ??
             filteredClaims.GetFirstMatch(JwtClaimTypes.Email, ClaimTypes.Email,
@@ -592,7 +592,7 @@ public class AccountController : Controller
         return null;
     }
 
-    private string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
+    private static string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
         var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value));
 

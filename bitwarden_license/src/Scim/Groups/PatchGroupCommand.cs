@@ -114,8 +114,8 @@ public class PatchGroupCommand : IPatchGroupCommand
 
         if (!operationHandled)
         {
-            _logger.LogWarning("Group patch operation not handled: {0} : ",
-                string.Join(", ", model.Operations.Select(o => $"{o.Op}:{o.Path}")));
+            _logger.LogWarning($"Group patch operation not handled:" +
+                $" {string.Join(", ", model.Operations.Select(o => $"{o.Op}:{o.Path}"))} :");
         }
     }
 
@@ -124,13 +124,13 @@ public class PatchGroupCommand : IPatchGroupCommand
         var ids = new List<Guid>();
         foreach (var obj in objArray.EnumerateArray())
         {
-            if (obj.TryGetProperty("value", out var valueProperty))
-            {
-                if (valueProperty.TryGetGuid(out var guid))
-                {
+             if (obj.TryGetProperty("value", out var valueProperty) && valueProperty.TryGetGuid(out var guid))
+             { 
+                
+                
                     ids.Add(guid);
-                }
-            }
+                
+             }
         }
         return ids;
     }
