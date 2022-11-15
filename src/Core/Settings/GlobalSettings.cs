@@ -31,6 +31,7 @@ public class GlobalSettings : IGlobalSettings
         get => BuildDirectory(_licenseDirectory, "/core/licenses");
         set => _licenseDirectory = value;
     }
+    public string LicenseUri { get; private set; } = "https://github.com/bitwarden/server/blob/master/LICENSE.txt";
     public string LicenseCertificatePassword { get; set; }
     public virtual string PushRelayBaseUri { get; set; }
     public virtual string InternalIdentityKey { get; set; }

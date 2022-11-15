@@ -346,6 +346,7 @@ public class AccountsController : Controller
     }
 
     [HttpPost("key")]
+    [Obsolete]
     public async Task PostKey([FromBody] UpdateKeyRequestModel model)
     {
         var user = await _userService.GetUserByPrincipalAsync(User);

@@ -60,7 +60,7 @@ public abstract class ReadOnlyIdentityUserStore :
     }
 
     public Task<string> GetUserIdAsync(IdentityUser user,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return Task.FromResult(user.Id);
     }

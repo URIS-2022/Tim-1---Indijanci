@@ -592,7 +592,7 @@ public class AccountController : Controller
         return null;
     }
 
-    private string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
+    private static string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
         var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value));
 
