@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Sustainsys.Saml2.AspNetCore2;
+using System;
 
 namespace Bit.Sso.Utilities;
 
@@ -66,7 +67,7 @@ public class DynamicAuthenticationScheme : AuthenticationScheme, IDynamicAuthent
         {
             if (oidcOptions.ConfigurationManager == null)
             {
-                throw new Exception("PostConfigurationNotExecutedError");
+                throw new ArgumentNullException("PostConfigurationNotExecutedError");
             }
             if (oidcOptions.Configuration == null)
             {
