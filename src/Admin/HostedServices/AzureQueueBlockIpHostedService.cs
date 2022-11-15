@@ -33,7 +33,7 @@ public class AzureQueueBlockIpHostedService : BlockIpHostedService
                     {
                         _logger.LogError(e, "Failed to block IP.");
                     }
-                    await _blockIpQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt);
+                    await _blockIpQueueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt, cancellationToken);
                 }
             }
 

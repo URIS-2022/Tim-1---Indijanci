@@ -140,7 +140,7 @@ public class CipherMiniDetailsResponseModel : CipherMiniResponseModel
         }
         else
         {
-            CollectionIds = new Guid[] { };
+            CollectionIds = Array.Empty<Guid>();
         }
     }
 
