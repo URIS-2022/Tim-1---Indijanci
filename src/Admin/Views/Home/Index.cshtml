@@ -84,7 +84,7 @@
 
             <dt class="col-sm-5">Web Latest</dt>
             <dd class="col-sm-7">
-                <span id="web-latest"><i class="fa fa-spinner fa-spin" title="Checking version..."></i></span>
+                <span id="web-latest"><em class="fa fa-spinner fa-spin" title="Checking version..."></em></span>
             </dd>
         </dl>
     </div>
@@ -176,7 +176,7 @@ else
     <dd class="col-sm-8 col-lg-9">
         @if(Bit.Core.Utilities.CoreHelpers.SettingHasValue(Model.GlobalSettings.Duo?.AKey))
         {
-            <span><i class="fa fa-check"></i> Configured</span>
+            <span><em class="fa fa-check"></em> Configured</span>
         }
         else
         {

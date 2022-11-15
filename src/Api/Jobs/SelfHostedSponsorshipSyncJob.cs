@@ -12,10 +12,10 @@ namespace Bit.Api.Jobs;
 public class SelfHostedSponsorshipSyncJob : BaseJob
 {
     private readonly IServiceProvider _serviceProvider;
-    private IOrganizationRepository _organizationRepository;
+    private readonly IOrganizationRepository _organizationRepository;
     private IOrganizationConnectionRepository _organizationConnectionRepository;
     private readonly ILicensingService _licensingService;
-    private GlobalSettings _globalSettings;
+    private readonly GlobalSettings _globalSettings;
 
     public SelfHostedSponsorshipSyncJob(
         IServiceProvider serviceProvider,

@@ -10,7 +10,6 @@ namespace Bit.Core.Services;
 
 public class NotificationsApiPushNotificationService : BaseIdentityClientService, IPushNotificationService
 {
-    private readonly GlobalSettings _globalSettings;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public NotificationsApiPushNotificationService(
@@ -27,7 +26,6 @@ public class NotificationsApiPushNotificationService : BaseIdentityClientService
             globalSettings.InternalIdentityKey,
             logger)
     {
-        _globalSettings = globalSettings;
         _httpContextAccessor = httpContextAccessor;
     }
 

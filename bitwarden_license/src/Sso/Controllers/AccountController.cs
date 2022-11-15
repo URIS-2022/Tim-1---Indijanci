@@ -1,4 +1,5 @@
-﻿using System.Security.Authentication;
+﻿using System;
+using System.Security.Authentication;
 using System.Security.Claims;
 using Bit.Core;
 using Bit.Core.Entities;
@@ -336,7 +337,7 @@ public class AccountController : Controller
         var ssoConfig = await _ssoConfigRepository.GetByOrganizationIdAsync(orgId);
         if (ssoConfig == null || !ssoConfig.Enabled)
         {
-            throw new Exception(_i18nService.T("OrganizationOrSsoConfigNotFound"));
+            throw new ArgumentNullException(_i18nService.T("OrganizationOrSsoConfigNotFound"));
         }
 
         var ssoConfigData = ssoConfig.GetData();
@@ -348,7 +349,7 @@ public class AccountController : Controller
             var acrClaim = externalUser.FindFirst(JwtClaimTypes.AuthenticationContextClassReference);
             if (acrClaim?.Value != ssoConfigData.ExpectedReturnAcrValue)
             {
-                throw new Exception(_i18nService.T("AcrMissingOrInvalid"));
+                throw new SystemException(_i18nService.T("AcrMissingOrInvalid"));
             }
         }
 
@@ -397,7 +398,6 @@ public class AccountController : Controller
 
         if (!Guid.TryParse(provider, out var orgId))
         {
-            // TODO: support non-org (server-wide) SSO in the future?
             throw new Exception(_i18nService.T("SSOProviderIsNotAnOrgId", provider));
         }
 
@@ -415,7 +415,7 @@ public class AccountController : Controller
             var split = userIdentifier.Split(",");
             if (split.Length < 2)
             {
-                throw new Exception(_i18nService.T("InvalidUserIdentifier"));
+                 throw new Exception(_i18nService.T("InvalidUserIdentifier"));
             }
             var userId = split[0];
             var token = split[1];
@@ -592,7 +592,7 @@ public class AccountController : Controller
         return null;
     }
 
-    private string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
+    private static string GetName(IEnumerable<Claim> claims, IEnumerable<string> additionalClaimTypes)
     {
         var filteredClaims = claims.Where(c => !string.IsNullOrWhiteSpace(c.Value));
 

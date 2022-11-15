@@ -84,7 +84,6 @@ public class GroupsController : Controller
     public async Task<IActionResult> List()
     {
         var groups = await _groupRepository.GetManyByOrganizationIdAsync(_currentContext.OrganizationId.Value);
-        // TODO: Get all CollectionGroup associations for the organization and marry them up here for the response.
         var groupResponses = groups.Select(g => new GroupResponseModel(g, null));
         var response = new ListResponseModel<GroupResponseModel>(groupResponses);
         return new JsonResult(response);

@@ -44,10 +44,15 @@ public class PasswordlessSignInManager<TUser> : SignInManager<TUser> where TUser
         {
             throw new ArgumentNullException(nameof(user));
         }
+        var attempt = await PasswordlessSignInAsyncAttempt(user, token, isPersistent);
+        return attempt;
+    }
 
+    private async Task<SignInResult> PasswordlessSignInAsyncAttempt(TUser user, string token, bool isPersistent)
+    {
         var attempt = await CheckPasswordlessSignInAsync(user, token);
-        return attempt.Succeeded ?
-            await SignInOrTwoFactorAsync(user, isPersistent, bypassTwoFactor: true) : attempt;
+        var twofactor = await SignInOrTwoFactorAsync(user, isPersistent, bypassTwoFactor: true);
+        return attempt.Succeeded ? twofactor : attempt;
     }
 
     public async Task<SignInResult> PasswordlessSignInAsync(string email, string token, bool isPersistent)

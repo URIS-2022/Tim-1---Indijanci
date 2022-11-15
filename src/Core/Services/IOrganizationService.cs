@@ -22,10 +22,11 @@ public interface IOrganizationService
         string ownerKey, string collectionName, string publicKey, string privateKey);
     Task UpdateLicenseAsync(Guid organizationId, OrganizationLicense license);
     Task DeleteAsync(Organization organization);
+    Task EnableAsync(Guid organizationId);
     Task EnableAsync(Guid organizationId, DateTime? expirationDate);
     Task DisableAsync(Guid organizationId, DateTime? expirationDate);
     Task UpdateExpirationDateAsync(Guid organizationId, DateTime? expirationDate);
-    Task EnableAsync(Guid organizationId);
+    
     Task UpdateAsync(Organization organization, bool updateBilling = false);
     Task UpdateTwoFactorProviderAsync(Organization organization, TwoFactorProviderType type);
     Task DisableTwoFactorProviderAsync(Organization organization, TwoFactorProviderType type);

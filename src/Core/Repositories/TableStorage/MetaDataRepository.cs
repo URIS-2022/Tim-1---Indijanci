@@ -87,7 +87,7 @@ public class MetaDataRepository : IMetaDataRepository
         }
         catch (StorageException e) when (e.RequestInformation.HttpStatusCode != (int)HttpStatusCode.NotFound)
         {
-            throw;
+            Console.WriteLine("Error occured!");
         }
     }
 }

@@ -105,9 +105,12 @@ WHERE
     [UserId] = @UserId
 GO
 
+DECLARE @newTable VARCHAR(15) = '[dbo].[Cipher]'
+GO
+
 IF EXISTS (
     SELECT * FROM sys.indexes  WHERE [Name]='IX_Cipher_OrganizationId_Type'
-    AND object_id = OBJECT_ID('[dbo].[Cipher]')
+    AND object_id = OBJECT_ID(@newTable)
 )
 BEGIN
     DROP INDEX [IX_Cipher_OrganizationId_Type] ON [dbo].[Cipher]
@@ -116,7 +119,7 @@ GO
 
 IF EXISTS (
     SELECT * FROM sys.indexes  WHERE [Name]='IX_Cipher_UserId_Type_IncludeAll'
-    AND object_id = OBJECT_ID('[dbo].[Cipher]')
+    AND object_id = OBJECT_ID(@newTable)
 )
 BEGIN
     DROP INDEX [IX_Cipher_UserId_Type_IncludeAll] ON [dbo].[Cipher]
@@ -125,7 +128,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM sys.indexes  WHERE [Name]='IX_Cipher_UserId_OrganizationId_IncludeAll'
-    AND object_id = OBJECT_ID('[dbo].[Cipher]')
+    AND object_id = OBJECT_ID(@newTable)
 )
 BEGIN
     CREATE NONCLUSTERED INDEX [IX_Cipher_UserId_OrganizationId_IncludeAll]
@@ -136,7 +139,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM sys.indexes  WHERE [Name]='IX_Cipher_OrganizationId'
-    AND object_id = OBJECT_ID('[dbo].[Cipher]')
+    AND object_id = OBJECT_ID(@newTable)
 )
 BEGIN
     CREATE NONCLUSTERED INDEX [IX_Cipher_OrganizationId]

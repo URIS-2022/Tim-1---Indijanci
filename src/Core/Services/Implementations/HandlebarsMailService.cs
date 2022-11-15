@@ -676,13 +676,13 @@ public class HandlebarsMailService : IMailService
         await _mailDeliveryService.SendEmailAsync(message);
     }
 
-    public async Task SendEmergencyAccessRecoveryTimedOut(EmergencyAccess emergencyAccess, string initiatingName, string email)
+    public async Task SendEmergencyAccessRecoveryTimedOut(EmergencyAccess ea, string initiatingName, string email)
     {
         var message = CreateDefaultMessage("Emergency Access Granted", email);
         var model = new EmergencyAccessRecoveryTimedOutViewModel
         {
             Name = CoreHelpers.SanitizeForEmail(initiatingName),
-            Action = emergencyAccess.Type.ToString(),
+            Action = ea.Type.ToString(),
         };
         await AddMessageContentAsync(message, "EmergencyAccessRecoveryTimedOut", model);
         message.Category = "EmergencyAccessRecoveryTimedOut";

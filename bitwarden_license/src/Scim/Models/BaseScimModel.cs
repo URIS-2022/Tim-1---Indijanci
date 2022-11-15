@@ -2,10 +2,10 @@
 
 public abstract class BaseScimModel
 {
-    public BaseScimModel()
+    protected BaseScimModel()
     { }
 
-    public BaseScimModel(string schema)
+    protected BaseScimModel(string schema)
     {
         Schemas = new List<string> { schema };
     }

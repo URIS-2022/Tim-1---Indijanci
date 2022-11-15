@@ -18,7 +18,7 @@ public abstract class ReadOnlyIdentityUserStore :
     }
 
     public Task<IdentityResult> DeleteAsync(IdentityUser user,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
@@ -30,7 +30,7 @@ public abstract class ReadOnlyIdentityUserStore :
         CancellationToken cancellationToken = default);
 
     public async Task<IdentityUser> FindByNameAsync(string normalizedUserName,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return await FindByEmailAsync(normalizedUserName, cancellationToken);
     }
@@ -60,7 +60,7 @@ public abstract class ReadOnlyIdentityUserStore :
     }
 
     public Task<string> GetUserIdAsync(IdentityUser user,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return Task.FromResult(user.Id);
     }

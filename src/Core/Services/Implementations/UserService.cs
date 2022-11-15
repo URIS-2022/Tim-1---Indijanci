@@ -19,7 +19,7 @@ using File = System.IO.File;
 
 namespace Bit.Core.Services;
 
-public class UserService : UserManager<User>, IUserService, IDisposable
+public class UserService : UserManager<User>, IUserService
 {
     private const string PremiumPlanId = "premium-annually";
     private const string StoragePlanId = "storage-gb-annually";
@@ -591,7 +591,7 @@ public class UserService : UserManager<User>, IUserService, IDisposable
         return IdentityResult.Success;
     }
 
-    public override Task<IdentityResult> ChangePasswordAsync(User user, string masterPassword, string newPassword)
+    public override Task<IdentityResult> ChangePasswordAsync(User user, string currentPassword, string newMasterPassword)
     {
 
         throw new NotImplementedException();

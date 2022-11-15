@@ -138,8 +138,6 @@ public class OrganizationUsersController : Controller
         }
 
         var userId = _userService.GetProperUserId(User);
-        var result = await _organizationService.InviteUsersAsync(orgGuidId, userId.Value,
-            new (OrganizationUserInvite, string)[] { (new OrganizationUserInvite(model.ToData()), null) });
     }
 
     [HttpPost("reinvite")]
@@ -208,8 +206,7 @@ public class OrganizationUsersController : Controller
         }
 
         var userId = _userService.GetProperUserId(User);
-        var result = await _organizationService.ConfirmUserAsync(orgGuidId, new Guid(id), model.Key, userId.Value,
-            _userService);
+        
     }
 
     [HttpPost("confirm")]

@@ -109,17 +109,13 @@ public class PolicyService : IPolicyService
                     case Enums.PolicyType.SingleOrg:
                         var userOrgs = await _organizationUserRepository.GetManyByManyUsersAsync(
                                 removableOrgUsers.Select(ou => ou.UserId.Value));
-                        foreach (var orgUser in removableOrgUsers)
-                        {
-                            if (userOrgs.Any(ou => ou.UserId == orgUser.UserId
-                                        && ou.OrganizationId != org.Id
+                        foreach (var orgUser in removableOrgUsers.Select(ou => ou).Where(ou => ou.OrganizationId != org.Id
                                         && ou.Status != OrganizationUserStatusType.Invited))
-                            {
-                                await organizationService.DeleteUserAsync(policy.OrganizationId, orgUser.Id,
-                                    savingUserId);
-                                await _mailService.SendOrganizationUserRemovedForPolicySingleOrgEmailAsync(
-                                    org.Name, orgUser.Email);
-                            }
+                        {
+                             await organizationService.DeleteUserAsync(policy.OrganizationId, orgUser.Id,
+                                 savingUserId);
+                             await _mailService.SendOrganizationUserRemovedForPolicySingleOrgEmailAsync(
+                                 org.Name, orgUser.Email);
                         }
                         break;
                     default:

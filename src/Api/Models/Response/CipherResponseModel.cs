@@ -5,6 +5,7 @@ using Bit.Core.Models.Api;
 using Bit.Core.Models.Data;
 using Bit.Core.Settings;
 using Core.Models.Data;
+using System;
 
 namespace Bit.Api.Models.Response;
 
@@ -140,7 +141,7 @@ public class CipherMiniDetailsResponseModel : CipherMiniResponseModel
         }
         else
         {
-            CollectionIds = new Guid[] { };
+            CollectionIds = Array.Empty<Guid>();
         }
     }
 

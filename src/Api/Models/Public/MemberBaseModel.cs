@@ -7,7 +7,7 @@ namespace Bit.Api.Models.Public;
 
 public abstract class MemberBaseModel
 {
-    public MemberBaseModel() { }
+    protected MemberBaseModel() { }
 
     protected MemberBaseModel(OrganizationUser user)
     {

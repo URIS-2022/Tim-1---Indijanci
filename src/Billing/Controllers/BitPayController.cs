@@ -157,7 +157,7 @@ public class BitPayController : Controller
         // Catch foreign key violations because user/org could have been deleted.
         catch (SqlException e) when (e.Number == 547) 
         {
-            throw new Exception(e.Message);
+            throw;
         }
 
         return new OkResult();
