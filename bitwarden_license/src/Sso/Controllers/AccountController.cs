@@ -406,7 +406,7 @@ public class AccountController : Controller
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new Exception(_i18nService.T("CannotFindEmailClaim"));
+                throw new NullReferenceException(_i18nService.T("CannotFindEmailClaim"));
             }
             existingUser = await _userRepository.GetByEmailAsync(email);
         }
