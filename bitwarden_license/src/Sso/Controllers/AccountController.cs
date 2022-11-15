@@ -337,7 +337,7 @@ public class AccountController : Controller
         var ssoConfig = await _ssoConfigRepository.GetByOrganizationIdAsync(orgId);
         if (ssoConfig == null || !ssoConfig.Enabled)
         {
-            throw new Exception(_i18nService.T("OrganizationOrSsoConfigNotFound"));
+            throw new ArgumentNullException(_i18nService.T("OrganizationOrSsoConfigNotFound"));
         }
 
         var ssoConfigData = ssoConfig.GetData();

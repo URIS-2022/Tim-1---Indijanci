@@ -16,7 +16,7 @@ public class EventRepository : Repository<Core.Entities.Event, Event, Guid>, IEv
         : base(serviceScopeFactory, mapper, (DatabaseContext context) => context.Events)
     { }
 
-    public async Task CreateAsync(IEvent e)
+    public async Task CreateAsyncEvent(IEvent e)
     {
         if (e is not Core.Entities.Event ev)
         {
@@ -35,7 +35,7 @@ public class EventRepository : Repository<Core.Entities.Event, Event, Guid>, IEv
 
         if (!entities.Skip(1).Any())
         {
-            await CreateAsync(entities.First());
+            await CreateAsyncEvent(entities.First());
             return;
         }
 
