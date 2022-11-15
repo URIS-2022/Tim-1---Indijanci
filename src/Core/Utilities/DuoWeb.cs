@@ -54,7 +54,7 @@ public static class DuoWeb
     public static readonly string ErrorSKey = "ERR|The Duo secret key passed to sign_request() is invalid.";
     public static string ErrorAKey = "ERR|The application secret key passed to sign_request() must be at least " +
         "40 characters.";
-    public static string ErrorUnknown = "ERR|An unknown error has occurred.";
+    public static readonly string ErrorUnknown = "ERR|An unknown error has occurred.";
 
     // throw on invalid bytes
     private static Encoding _encoding = new UTF8Encoding(false, true);

@@ -30,7 +30,6 @@ public class SendSponsorshipOfferCommand : ISendSponsorshipOfferCommand
         foreach (var sponsorship in sponsorships)
         {
             var user = await _userRepository.GetByEmailAsync(sponsorship.OfferedToEmail);
-            var isExistingAccount = user != null;
             invites.Add((sponsorship.OfferedToEmail, user != null, _tokenFactory.Protect(new OrganizationSponsorshipOfferTokenable(sponsorship))));
         }
 

@@ -15,7 +15,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
 
     private readonly string URL = "https://api.cloudflare.com/";
 
-    public BlockIpHostedService(
+    protected BlockIpHostedService(
         ILogger<BlockIpHostedService> logger,
         IOptions<AdminSettings> adminSettings,
         GlobalSettings globalSettings)

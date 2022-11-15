@@ -190,7 +190,8 @@ public class CollectionsController : Controller
 
     private async Task<bool> CanCreateCollection(Guid orgId, Guid collectionId)
     {
-        if (collectionId != default)
+        var newVar = Guid.Empty;
+        if (collectionId != newVar)
         {
             return false;
         }

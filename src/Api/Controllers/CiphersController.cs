@@ -799,7 +799,7 @@ public class CiphersController : Controller
                     catch (Exception e)
                     {
                         _logger.LogError(e, $"Uncaught exception occurred while handling event grid event: {JsonSerializer.Serialize(eventGridEvent)}");
-                        return;
+                        
                     }
                 }
             }

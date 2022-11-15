@@ -23,7 +23,7 @@ public class AzureAttachmentStorageServiceTests
 
     // Remove this test when we add actual tests. It only proves that
     // we've properly constructed the system under test.
-    [Fact(Skip = "Needs additional work")]
+    [Fact]
     public void ServiceExists()
     {
         Assert.NotNull(_sut);

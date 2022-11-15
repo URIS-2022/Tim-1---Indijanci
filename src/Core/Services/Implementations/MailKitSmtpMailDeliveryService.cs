@@ -81,8 +81,7 @@ public class MailKitSmtpMailDeliveryService : IMailDeliveryService
             }
             else
             {
-                var useSsl = _globalSettings.Mail.Smtp.Port == 587 && !_globalSettings.Mail.Smtp.SslOverride ?
-                    false : _globalSettings.Mail.Smtp.Ssl;
+                var useSsl = _globalSettings.Mail.Smtp.Port == 587 && !_globalSettings.Mail.Smtp.SslOverride;
                 await client.ConnectAsync(_globalSettings.Mail.Smtp.Host, _globalSettings.Mail.Smtp.Port, useSsl);
             }
 

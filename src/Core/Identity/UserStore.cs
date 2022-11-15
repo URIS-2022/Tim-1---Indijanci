@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Bit.Core.Identity;
 
 public class UserStore :
-    IUserStore<User>,
+    
     IUserPasswordStore<User>,
     IUserEmailStore<User>,
     IUserTwoFactorStore<User>,

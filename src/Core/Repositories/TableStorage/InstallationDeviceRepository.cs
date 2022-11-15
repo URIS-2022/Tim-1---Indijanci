@@ -78,7 +78,7 @@ public class InstallationDeviceRepository : IInstallationDeviceRepository
         }
         catch (StorageException e) when (e.RequestInformation.HttpStatusCode != (int)HttpStatusCode.NotFound)
         {
-            throw;
+            Console.WriteLine("Storage Error Occured!");
         }
     }
 }

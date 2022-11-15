@@ -415,7 +415,7 @@ public class AccountController : Controller
             var split = userIdentifier.Split(",");
             if (split.Length < 2)
             {
-                throw new Exception(_i18nService.T("InvalidUserIdentifier"));
+                 throw new Exception(_i18nService.T("InvalidUserIdentifier"));
             }
             var userId = split[0];
             var token = split[1];

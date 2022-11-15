@@ -17,7 +17,7 @@ public class CustomTokenRequestValidator : BaseRequestValidator<CustomTokenReque
 {
     private UserManager<User> _userManager;
     private readonly ISsoConfigRepository _ssoConfigRepository;
-    private readonly IOrganizationRepository _organizationRepository;
+    
 
     public CustomTokenRequestValidator(
         UserManager<User> userManager,
@@ -44,7 +44,7 @@ public class CustomTokenRequestValidator : BaseRequestValidator<CustomTokenReque
     {
         _userManager = userManager;
         _ssoConfigRepository = ssoConfigRepository;
-        _organizationRepository = organizationRepository;
+        
     }
 
     public async Task ValidateAsync(CustomTokenRequestValidationContext context)

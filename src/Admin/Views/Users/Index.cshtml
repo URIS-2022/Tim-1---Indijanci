@@ -44,8 +44,8 @@
                         <td>
                             @if(user.Premium)
                             {
-                                <i class="fa fa-star fa-lg fa-fw"
-                                   title="Premium, expires @(user.PremiumExpirationDate?.ToShortDateString() ?? "-")"></i>
+                                <em class="fa fa-star fa-lg fa-fw"
+                                   title="Premium, expires @(user.PremiumExpirationDate?.ToShortDateString() ?? "-")"></em>
                             }
                             else
                             {

@@ -1,4 +1,5 @@
-﻿using AspNetCoreRateLimit;
+﻿using System.Text;
+using AspNetCoreRateLimit;
 using Bit.Core.Models.Api;
 using Bit.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -74,17 +75,17 @@ public class CustomIpRateLimitMiddleware : IpRateLimitMiddleware
             return null;
         }
 
-        var s = string.Empty;
+        StringBuilder s = new StringBuilder();
         foreach (var header in httpContext.Request.Headers)
         {
-            s += $"Header \"{header.Key}\": {header.Value} \n";
+            s.Append($"Header \"{header.Key}\": {header.Value} \n");
         }
 
         foreach (var query in httpContext.Request.Query)
         {
-            s += $"Query \"{query.Key}\": {query.Value} \n";
+            s.Append($"Query \"{query.Key}\": {query.Value} \n");
         }
 
-        return s;
+        return s.ToString();
     }
 }
