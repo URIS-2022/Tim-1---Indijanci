@@ -52,7 +52,7 @@ public static class DuoWeb
     public static readonly string ErrorUser = "ERR|The username passed to sign_request() is invalid.";
     public static readonly string ErrorIKey = "ERR|The Duo integration key passed to sign_request() is invalid.";
     public static readonly string ErrorSKey = "ERR|The Duo secret key passed to sign_request() is invalid.";
-    public static string ErrorAKey = "ERR|The application secret key passed to sign_request() must be at least " +
+    public static readonly string ErrorAKey = "ERR|The application secret key passed to sign_request() must be at least " +
         "40 characters.";
     public static readonly string ErrorUnknown = "ERR|An unknown error has occurred.";
 

@@ -16,12 +16,9 @@ public static class ClaimsExtensions
         foreach (var name in possibleNames.Select(Normalize))
         {
             // Second by order of claims (find claim by name)
-            foreach (var claim in normalizedClaims)
+            foreach (var claim in normalizedClaims.Where(Claim => (Claim.Item1 == name)))
             {
-                if (Equals(claim.Item1, name))
-                {
                     return claim.Value;
-                }
             }
         }
         return null;
