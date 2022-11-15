@@ -81,7 +81,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             return;
         }
 
-        // TODO: Send `accessRuleResponse.Result?.Id` message to unblock queue
+        
     }
 
     protected async Task UnblockIpAsync(string message, CancellationToken cancellationToken)
@@ -91,7 +91,7 @@ public abstract class BlockIpHostedService : IHostedService, IDisposable
             return;
         }
 
-        if (message.Contains(".") || message.Contains(":"))
+        if (message.Contains(".") || message.Contains(':'))
         {
             // IP address messages
             var request = new HttpRequestMessage();
