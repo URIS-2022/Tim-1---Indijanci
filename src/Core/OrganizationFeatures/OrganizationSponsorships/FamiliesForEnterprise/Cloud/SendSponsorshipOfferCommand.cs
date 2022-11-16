@@ -29,8 +29,8 @@ public class SendSponsorshipOfferCommand : ISendSponsorshipOfferCommand
         var invites1 = new List<(string, bool, string)>();
         foreach (var invite in invites)
         {
-            var user = await _userRepository.GetByEmailAsync(sponsorship.OfferedToEmail);
-            invites.Add((sponsorship.OfferedToEmail, user != null, _tokenFactory.Protect(new OrganizationSponsorshipOfferTokenable(sponsorship))));
+            var user = await _userRepository.GetByEmailAsync(invite.OfferedToEmail);
+            invite.Add((invite.OfferedToEmail, user != null, _tokenFactory.Protect(new OrganizationSponsorshipOfferTokenable(invite))));
         }
 
         await _mailService.BulkSendFamiliesForEnterpriseOfferEmailAsync(sponsoringOrgName, invites1);
