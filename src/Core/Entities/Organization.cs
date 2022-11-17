@@ -69,7 +69,7 @@ public class Organization : ITableObject<Guid>, IStorableSubscriber, IRevisable,
 
     public void SetNewId()
     {
-        if (Id == default(Guid))
+        if (Id == Guid.Empty)
         {
             Id = CoreHelpers.GenerateComb();
         }

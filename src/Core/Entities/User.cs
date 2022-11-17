@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using Bit.Core.Enums;
 using Bit.Core.Models;
@@ -101,7 +102,7 @@ public class User : ITableObject<Guid>, IStorableSubscriber, IRevisable, ITwoFac
     {
         if (string.IsNullOrWhiteSpace(TwoFactorProviders))
         {
-            return null;
+            return new Dictionary<TwoFactorProviderType, TwoFactorProvider>();
         }
 
         try

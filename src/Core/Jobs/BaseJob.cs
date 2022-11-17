@@ -20,7 +20,7 @@ public abstract class BaseJob : IJob
         }
         catch (Exception e)
         {
-            _logger.LogError(2, e, "Error performing {0}.", GetType().Name);
+            _logger.LogError(2, e, "Error performing {Name}.", GetType().Name);
         }
     }
 

@@ -627,7 +627,7 @@ public class UserService : UserManager<User>, IUserService
         return IdentityResult.Failed(_identityErrorDescriber.PasswordMismatch());
     }
 
-    public async Task<IdentityResult> SetPasswordAsync(User user, string masterPassword, string key,
+    public async Task<IdentityResult> SetPasswordAsync(User user, string newMasterPassword, string key,
         string orgIdentifier = null)
     {
         if (user == null)
@@ -641,7 +641,7 @@ public class UserService : UserManager<User>, IUserService
             return IdentityResult.Failed(_identityErrorDescriber.UserAlreadyHasPassword());
         }
 
-        var result = await UpdatePasswordHash(user, masterPassword, true, false);
+        var result = await UpdatePasswordHash(user, newMasterPassword, true, false);
         if (!result.Succeeded)
         {
             return result;

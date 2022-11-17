@@ -5,7 +5,7 @@ namespace Bit.Core.Identity;
 
 public class RoleStore : IRoleStore<Role>
 {
-    public void Dispose() { }
+    public void Dispose() { GC.SuppressFinalize(this); }
 
     public Task<IdentityResult> CreateAsync(Role role, CancellationToken cancellationToken)
     {
